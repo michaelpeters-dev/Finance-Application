@@ -1,56 +1,84 @@
 import BoxHeader from "@/components/BoxHeader";
 import DashboardBox from "@/components/DashboardBox";
 import { useGetKpisQuery } from "@/state/api";
-import { useTheme, Theme } from "@mui/material/styles";
+import { useTheme } from "@mui/material";
 import { useMemo } from "react";
 import {
-  Area,
-  AreaChart,
   ResponsiveContainer,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Line,
   CartesianGrid,
-  Legend,
-  LineChart,
+  AreaChart,
   BarChart,
   Bar,
+  LineChart,
+  XAxis,
+  YAxis,
+  Legend,
+  Line,
+  Tooltip,
+  Area,
 } from "recharts";
 
 const Row1 = () => {
-  const { palette } = useTheme<Theme>();
+  const { palette } = useTheme();
   const { data } = useGetKpisQuery();
+
+  const revenue = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(
+        ({ month, revenue }: { month: string; revenue: number }) => {
+          return {
+            name: month.substring(0, 3),
+            revenue: revenue,
+          };
+        }
+      )
+    );
+  }, [data]);
 
   const revenueExpenses = useMemo(() => {
     return (
       data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => ({
-        name: month.substring(0, 3),
-        revenue,
-        expenses,
-      }))
+      data[0].monthlyData.map(
+        ({
+          month,
+          revenue,
+          expenses,
+        }: {
+          month: string;
+          revenue: number;
+          expenses: number;
+        }) => {
+          return {
+            name: month.substring(0, 3),
+            revenue: revenue,
+            expenses: expenses,
+          };
+        }
+      )
     );
   }, [data]);
 
   const revenueProfit = useMemo(() => {
     return (
       data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => ({
-        name: month.substring(0, 3),
-        revenue,
-        profit: (revenue - expenses).toFixed(2),
-      }))
-    );
-  }, [data]);
-
-  const revenue = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue }) => ({
-        name: month.substring(0, 3),
-        revenue,
-      }))
+      data[0].monthlyData.map(
+        ({
+          month,
+          revenue,
+          expenses,
+        }: {
+          month: string;
+          revenue: number;
+          expenses: number;
+        }) => {
+          return {
+            name: month.substring(0, 3),
+            revenue: revenue,
+            profit: (revenue - expenses).toFixed(2),
+          };
+        }
+      )
     );
   }, [data]);
 
@@ -131,7 +159,6 @@ const Row1 = () => {
           </AreaChart>
         </ResponsiveContainer>
       </DashboardBox>
-
       <DashboardBox gridArea="b">
         <BoxHeader
           title="Profit and Revenue"
@@ -140,6 +167,8 @@ const Row1 = () => {
         />
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
+            width={500}
+            height={400}
             data={revenueProfit}
             margin={{
               top: 20,
@@ -148,12 +177,12 @@ const Row1 = () => {
               bottom: 55,
             }}
           >
+            <CartesianGrid vertical={false} stroke={palette.grey[800]} />
             <XAxis
               dataKey="name"
               tickLine={false}
               style={{ fontSize: "10px" }}
             />
-            <CartesianGrid vertical={false} stroke={palette.grey[800]} />
             <YAxis
               yAxisId="left"
               tickLine={false}
@@ -189,7 +218,6 @@ const Row1 = () => {
           </LineChart>
         </ResponsiveContainer>
       </DashboardBox>
-
       <DashboardBox gridArea="c">
         <BoxHeader
           title="Revenue Month by Month"

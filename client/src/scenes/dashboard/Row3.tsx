@@ -6,14 +6,13 @@ import {
   useGetProductsQuery,
   useGetTransactionsQuery,
 } from "@/state/api";
-import { Box, Typography } from "@mui/material";
-import { useTheme, Theme } from "@mui/material/styles";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import React, { useMemo } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const Row3 = () => {
-  const { palette } = useTheme<Theme>();
+  const { palette } = useTheme();
   const pieColors = [palette.primary[800], palette.primary[500]];
 
   const { data: kpiData } = useGetKpisQuery();
@@ -23,9 +22,8 @@ const Row3 = () => {
   const pieChartData = useMemo(() => {
     if (kpiData) {
       const totalExpenses = kpiData[0].totalExpenses;
-      return Object.entries(kpiData[0].expensesByCategory)
-        .filter(([key]) => key !== "$*")
-        .map(([key, value]) => {
+      return Object.entries(kpiData[0].expensesByCategory).map(
+        ([key, value]) => {
           return [
             {
               name: key,
@@ -33,10 +31,11 @@ const Row3 = () => {
             },
             {
               name: `${key} of Total`,
-              value: totalExpenses - value,
+              value: totalExpenses - (value as number),
             },
           ];
-        });
+        }
+      );
     }
   }, [kpiData]);
 
@@ -161,7 +160,7 @@ const Row3 = () => {
         <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
           {pieChartData?.map((data, i) => (
             <Box key={`${data[0].name}-${i}`}>
-              <PieChart width={110} height={80}>
+              <PieChart width={110} height={100}>
                 <Pie
                   stroke="none"
                   data={data}

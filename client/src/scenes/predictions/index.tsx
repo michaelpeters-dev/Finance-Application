@@ -1,8 +1,7 @@
 import DashboardBox from "@/components/DashboardBox";
 import FlexBetween from "@/components/FlexBetween";
 import { useGetKpisQuery } from "@/state/api";
-import { Box, Button, Typography } from "@mui/material";
-import { useTheme, Theme } from "@mui/material/styles";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import {
   CartesianGrid,
@@ -18,7 +17,7 @@ import {
 import regression, { DataPoint } from "regression";
 
 const Predictions = () => {
-  const { palette } = useTheme<Theme>();
+  const { palette } = useTheme();
   const [isPredictions, setIsPredictions] = useState(false);
   const { data: kpiData } = useGetKpisQuery();
 
@@ -27,20 +26,23 @@ const Predictions = () => {
     const monthData = kpiData[0].monthlyData;
 
     const formatted: Array<DataPoint> = monthData.map(
-      ({ revenue }, i: number) => {
+      ({ revenue }: { revenue: number }, i: number) => {
         return [i, revenue];
       }
     );
+
     const regressionLine = regression.linear(formatted);
 
-    return monthData.map(({ month, revenue }, i: number) => {
-      return {
-        name: month,
-        "Actual Revenue": revenue,
-        "Regression Line": regressionLine.points[i][1],
-        "Predicted Revenue": regressionLine.predict(i + 12)[1],
-      };
-    });
+    return monthData.map(
+      ({ month, revenue }: { month: string; revenue: number }, i: number) => {
+        return {
+          name: month,
+          "Actual Revenue": revenue,
+          "Regression Line": regressionLine.points[i][1],
+          "Predicted Revenue": regressionLine.predict(i + 12)[1],
+        };
+      }
+    );
   }, [kpiData]);
 
   return (
