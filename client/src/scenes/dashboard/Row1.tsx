@@ -82,13 +82,46 @@ const Row1 = () => {
     );
   }, [data]);
 
+  const revenueGrowth = useMemo(() => {
+    if (!data || data[0].monthlyData.length < 2) return null;
+    const monthlyData = data[0].monthlyData;
+    const last = monthlyData[monthlyData.length - 1].revenue;
+    const secondLast = monthlyData[monthlyData.length - 2].revenue;
+    const growth = ((last - secondLast) / secondLast) * 100;
+    return growth >= 0 ? `+${growth.toFixed(1)}%` : `${growth.toFixed(1)}%`;
+  }, [data]);
+
+  const latestProfitMargin = useMemo(() => {
+    if (!data) return null;
+    const lastMonth = data[0].monthlyData.at(-1);
+    if (!lastMonth) return null;
+
+    const { revenue, expenses } = lastMonth;
+    const profitMargin = ((revenue - expenses) / revenue) * 100;
+    const formatted =
+      profitMargin >= 0
+        ? `+${profitMargin.toFixed(1)}%`
+        : `${profitMargin.toFixed(1)}%`;
+    return formatted;
+  }, [data]);
+
+  const ytdRevenueGrowth = useMemo(() => {
+    if (!data || data[0].monthlyData.length < 12) return null;
+
+    const jan = data[0].monthlyData[0].revenue;
+    const dec = data[0].monthlyData[11].revenue;
+    const growth = ((dec - jan) / jan) * 100;
+
+    return growth >= 0 ? `+${growth.toFixed(1)}%` : `${growth.toFixed(1)}%`;
+  }, [data]);
+
   return (
     <>
       <DashboardBox gridArea="a">
         <BoxHeader
           title="Revenue and Expenses"
           subtitle="top line represents revenue, bottom line represents expenses"
-          sideText="+4%"
+          sideText={revenueGrowth || "N/A"}
         />
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
@@ -159,11 +192,12 @@ const Row1 = () => {
           </AreaChart>
         </ResponsiveContainer>
       </DashboardBox>
+
       <DashboardBox gridArea="b">
         <BoxHeader
           title="Profit and Revenue"
           subtitle="top line represents revenue, bottom line represents expenses"
-          sideText="+4%"
+          sideText={latestProfitMargin || "N/A"}
         />
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -218,11 +252,12 @@ const Row1 = () => {
           </LineChart>
         </ResponsiveContainer>
       </DashboardBox>
+
       <DashboardBox gridArea="c">
         <BoxHeader
           title="Revenue Month by Month"
           subtitle="graph representing the revenue month by month"
-          sideText="+4%"
+          sideText={ytdRevenueGrowth || "N/A"}
         />
         <ResponsiveContainer width="100%" height="100%">
           <BarChart

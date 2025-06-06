@@ -39,6 +39,28 @@ const Row3 = () => {
     }
   }, [kpiData]);
 
+  const topExpenseCategory = useMemo(() => {
+    if (!kpiData || !kpiData[0]?.expensesByCategory) return null;
+
+    const totalExpenses = kpiData[0].totalExpenses;
+    const categories = kpiData[0].expensesByCategory;
+
+    if (!totalExpenses || Object.keys(categories).length === 0) return null;
+
+    let topCategory = "";
+    let maxValue = 0;
+
+    for (const [category, value] of Object.entries(categories)) {
+      if (value > maxValue) {
+        maxValue = value;
+        topCategory = category;
+      }
+    }
+
+    const percentage = (maxValue / totalExpenses) * 100;
+    return `${topCategory} +${percentage.toFixed(1)}%`;
+  }, [kpiData]);
+
   const productColumns = [
     {
       field: "_id",
@@ -158,7 +180,11 @@ const Row3 = () => {
       </DashboardBox>
 
       <DashboardBox gridArea="i">
-        <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
+        <BoxHeader
+          title="Expense Breakdown By Category"
+          sideText={topExpenseCategory ?? "N/A"}
+        />
+
         <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
           {pieChartData
             ?.filter((data) => data[0].name && data[0].name !== "$*")
