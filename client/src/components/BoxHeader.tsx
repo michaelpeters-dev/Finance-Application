@@ -1,6 +1,6 @@
 import React from "react";
 import FlexBetween from "./FlexBetween";
-import { useTheme } from "@emotion/react";
+import { useTheme, Theme } from "@mui/material/styles";
 import { Box, Typography } from "@mui/material";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const BoxHeader = ({ icon, title, subtitle, sideText }: Props) => {
-  const { palette } = useTheme();
+  const { palette } = useTheme<Theme>();
   return (
     <FlexBetween color={palette.grey[400]} margin="1.5rem 1rem 0rem 1rem">
       <FlexBetween>

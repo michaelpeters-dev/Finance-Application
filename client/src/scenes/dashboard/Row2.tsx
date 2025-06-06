@@ -2,7 +2,8 @@ import BoxHeader from "@/components/BoxHeader";
 import DashboardBox from "@/components/DashboardBox";
 import FlexBetween from "@/components/FlexBetween";
 import { useGetKpisQuery, useGetProductsQuery } from "@/state/api";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { useTheme, Theme } from "@mui/material/styles";
 import React, { useMemo } from "react";
 import {
   Tooltip,
@@ -26,7 +27,7 @@ const pieData = [
 ];
 
 const Row2 = () => {
-  const { palette } = useTheme();
+  const { palette } = useTheme<Theme>();
   const pieColors = [palette.primary[800], palette.primary[300]];
   const { data: operationalData } = useGetKpisQuery();
   const { data: productData } = useGetProductsQuery();

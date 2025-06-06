@@ -6,13 +6,14 @@ import {
   useGetProductsQuery,
   useGetTransactionsQuery,
 } from "@/state/api";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { useTheme, Theme } from "@mui/material/styles";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import React, { useMemo } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const Row3 = () => {
-  const { palette } = useTheme();
+  const { palette } = useTheme<Theme>();
   const pieColors = [palette.primary[800], palette.primary[500]];
 
   const { data: kpiData } = useGetKpisQuery();

@@ -1,7 +1,7 @@
 import BoxHeader from "@/components/BoxHeader";
 import DashboardBox from "@/components/DashboardBox";
 import { useGetKpisQuery } from "@/state/api";
-import { useTheme } from "@mui/material";
+import { useTheme, Theme } from "@mui/material/styles";
 import { useMemo } from "react";
 import {
   Area,
@@ -19,7 +19,7 @@ import {
 } from "recharts";
 
 const Row1 = () => {
-  const { palette } = useTheme();
+  const { palette } = useTheme<Theme>();
   const { data } = useGetKpisQuery();
 
   const revenueExpenses = useMemo(() => {
