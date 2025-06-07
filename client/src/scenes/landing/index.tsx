@@ -180,7 +180,7 @@ const Landing = () => {
               icon={
                 <DashboardCustomizeIcon sx={{ fontSize: 40, color: "white" }} />
               }
-              description="Personalize your data views for what matters most."
+              description="Structured data views to show you what matters most."
             />
           </Box>
         </Box>
@@ -196,8 +196,7 @@ const Landing = () => {
             mx="auto"
             fontSize="1.05rem"
           >
-            Our support team is here 24/7 to answer questions, guide onboarding,
-            and help you get the most out of Finance App.
+            Email our support team to get the most out of Finance App.
           </Typography>
           <Box mt={4}>
             <Button
