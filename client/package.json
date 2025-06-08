@@ -29,7 +29,6 @@
     "tsparticles": "^3.8.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.8",
     "@types/node": "^22.15.30",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
@@ -38,7 +37,7 @@
     "@vitejs/plugin-react": "^4.5.1",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.4",
-    "tailwindcss": "^4.1.8",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }
