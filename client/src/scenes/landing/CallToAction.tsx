@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const CallToAction = () => {
   return (
@@ -25,33 +26,35 @@ const CallToAction = () => {
             placeholder="your@email.com"
             className="h-12 w-full bg-white/20 rounded-lg px-5 font-medium placeholder:text-[#9CA3AF] text-white"
           />
-          <Button
-            fullWidth
-            sx={{
-              height: "48px",
-              backgroundColor: "white",
-              color: "black",
-              textTransform: "none",
-              whiteSpace: "nowrap",
-              padding: {
-                xs: "0.5rem 1.25rem",
-                sm: "0.5rem 1.5rem",
-                md: "0.5rem 2rem",
-              },
-              borderRadius: "0.5rem",
-              fontWeight: 500,
-              fontSize: {
-                xs: "0.875rem",
-                sm: "0.92rem",
-              },
-              boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
-              "&:hover": {
-                backgroundColor: "#f0f0f0",
-              },
-            }}
-          >
-            Get access
-          </Button>
+          <Link to="/dashboard">
+            <Button
+              fullWidth
+              sx={{
+                height: "48px",
+                backgroundColor: "white",
+                color: "black",
+                textTransform: "none",
+                whiteSpace: "nowrap",
+                padding: {
+                  xs: "0.5rem 1.25rem",
+                  sm: "0.5rem 1.5rem",
+                  md: "0.5rem 2rem",
+                },
+                borderRadius: "0.5rem",
+                fontWeight: 500,
+                fontSize: {
+                  xs: "0.875rem",
+                  sm: "0.92rem",
+                },
+                boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
+                "&:hover": {
+                  backgroundColor: "#f0f0f0",
+                },
+              }}
+            >
+              Get access
+            </Button>
+          </Link>
         </form>
       </div>
     </div>
