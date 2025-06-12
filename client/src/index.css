@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
 
 html,
 body,
@@ -12,6 +15,8 @@ body,
   width: 100%;
   font-family: "Inter", sans-serif;
   background-color: #1f2026;
+  overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
