@@ -1,25 +1,50 @@
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { themeSettings } from "./theme";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Navbar from "@/scenes/navbar";
 import Dashboard from "@/scenes/dashboard";
-import Predictions from "@/scenes/predictions";
 import Landing from "@/scenes/landing";
+import Sidebar from "./scenes/sidebar";
+import Topbar from "@/scenes/topbar";
+import LinearRegression from "@/scenes/linearregression";
+import { Toaster } from "react-hot-toast";
 
 function AppContent() {
   const location = useLocation();
-  const hideNavbar = location.pathname === "/";
+  const isLandingPage = location.pathname === "/";
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   return (
-    <>
-      {!hideNavbar && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/predictions" element={<Predictions />} />
-      </Routes>
-    </>
+    <Box width="100%" height="100%">
+      <Box display="flex">
+        {!isLandingPage && (
+          <Box
+            sx={{
+              width: isSidebarOpen ? "256px" : "64px",
+              transition: "width 0.3s",
+              flexShrink: 0,
+            }}
+          >
+            <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+          </Box>
+        )}
+
+        <Box flexGrow={1} minWidth={0} overflow="auto">
+          {!isLandingPage && <Topbar isSidebarOpen={isSidebarOpen} />}
+          <Box mt={isLandingPage ? 0 : "64px"}>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route
+                path="/dashboard"
+                element={<Dashboard isSidebarOpen={isSidebarOpen} />}
+              />
+              <Route path="/linearregression" element={<LinearRegression />} />
+            </Routes>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

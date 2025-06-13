@@ -14,12 +14,17 @@ const LandingNavbar = () => {
       <div className="relative z-50 bg-black isolate">
         <div className="px-4">
           <div className="py-4 px-2 flex justify-between items-center">
-            <img
-              src={logo}
-              width={45}
-              alt="Logo"
-              className="drop-shadow-[0_0_4px_rgba(255,255,255,0.7)]"
-            />
+            <div className="flex items-center gap-2">
+              <img
+                src={logo}
+                width={45}
+                alt="Logo"
+                className="drop-shadow-[0_0_4px_rgba(255,255,255,0.7)]"
+              />
+              <span className="text-white text-lg font-semibold tracking-tighter px-5">
+                Finance Application
+              </span>
+            </div>
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-6">

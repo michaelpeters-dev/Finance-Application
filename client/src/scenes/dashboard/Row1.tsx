@@ -120,7 +120,7 @@ const Row1 = () => {
       <DashboardBox gridArea="a">
         <BoxHeader
           title="Revenue and Expenses"
-          subtitle="top line represents revenue, bottom line represents expenses"
+          subtitle="Top line represents revenue, bottom line represents expenses"
           sideText={revenueGrowth || "N/A"}
         />
         <ResponsiveContainer width="100%" height="100%">
@@ -196,7 +196,7 @@ const Row1 = () => {
       <DashboardBox gridArea="b">
         <BoxHeader
           title="Profit and Revenue"
-          subtitle="top line represents revenue, bottom line represents expenses"
+          subtitle="Purple line represents revenue, green line represents revenue"
           sideText={latestProfitMargin || "N/A"}
         />
         <ResponsiveContainer width="100%" height="100%">
@@ -256,7 +256,7 @@ const Row1 = () => {
       <DashboardBox gridArea="c">
         <BoxHeader
           title="Revenue Month by Month"
-          subtitle="graph representing the revenue month by month"
+          subtitle="Graph representing the revenue month by month"
           sideText={ytdRevenueGrowth || "N/A"}
         />
         <ResponsiveContainer width="100%" height="100%">

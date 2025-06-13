@@ -11,7 +11,6 @@ export const tokens = {
     900: "#242427",
   },
   primary: {
-    // light green
     100: "#d0fcf4",
     200: "#a0f9e9",
     300: "#71f5de",
@@ -23,7 +22,6 @@ export const tokens = {
     900: "#043028",
   },
   secondary: {
-    // yellow
     100: "#fcf0dd",
     200: "#fae1bb",
     300: "#f7d299",
@@ -35,16 +33,15 @@ export const tokens = {
     900: "#302411",
   },
   tertiary: {
-    // purple
     500: "#8884d8",
   },
   background: {
+    navbar: "#d1d3da",     // <- NEW: for sidebar/topbar
     light: "#2d2d34",
     main: "#1f2026",
   },
 };
 
-// mui theme settings
 export const themeSettings = {
   palette: {
     primary: {
@@ -66,40 +63,41 @@ export const themeSettings = {
     background: {
       default: tokens.background.main,
       light: tokens.background.light,
+      navbar: tokens.background.navbar, // <- NEW
     },
   },
   typography: {
     fontFamily: ["Inter", "sans-serif"].join(","),
     fontSize: 12,
     h1: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
       fontSize: 32,
+      fontFamily: "Inter, sans-serif",
     },
     h2: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
       fontSize: 24,
+      fontFamily: "Inter, sans-serif",
     },
     h3: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
       fontSize: 20,
       fontWeight: 800,
+      fontFamily: "Inter, sans-serif",
       color: tokens.grey[200],
     },
     h4: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
       fontSize: 14,
       fontWeight: 600,
+      fontFamily: "Inter, sans-serif",
       color: tokens.grey[300],
     },
     h5: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
       fontSize: 12,
       fontWeight: 400,
+      fontFamily: "Inter, sans-serif",
       color: tokens.grey[500],
     },
     h6: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
       fontSize: 10,
+      fontFamily: "Inter, sans-serif",
       color: tokens.grey[700],
     },
   },

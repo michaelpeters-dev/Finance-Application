@@ -120,8 +120,9 @@ const Row3 = () => {
           height="75%"
           sx={{
             "& .MuiDataGrid-root": {
-              color: palette.grey[300],
+              color: palette.grey[400],
               border: "none",
+              backgroundColor: "transparent",
             },
             "& .MuiDataGrid-cell": {
               borderBottom: `1px solid ${palette.grey[800]} !important`,
@@ -150,13 +151,14 @@ const Row3 = () => {
           sideText={`${transactionData?.length} latest transactions`}
         />
         <Box
-          mt="1rem"
+          mt="0.5rem"
           p="0 0.5rem"
-          height="80%"
+          height="75%"
           sx={{
             "& .MuiDataGrid-root": {
-              color: palette.grey[300],
+              color: palette.grey[400],
               border: "none",
+              backgroundColor: "transparent",
             },
             "& .MuiDataGrid-cell": {
               borderBottom: `1px solid ${palette.grey[800]} !important`,

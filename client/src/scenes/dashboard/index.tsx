@@ -1,7 +1,11 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import Row1 from "./Row1";
 import Row2 from "./Row2";
 import Row3 from "./Row3";
+
+interface DashboardProps {
+  isSidebarOpen: boolean;
+}
 
 const gridTemplateLargeScreens = `
   "a b c"
@@ -15,6 +19,7 @@ const gridTemplateLargeScreens = `
   "g h j"
   "g h j"
 `;
+
 const gridTemplateSmallScreens = `
   "a"
   "a"
@@ -48,25 +53,36 @@ const gridTemplateSmallScreens = `
   "j"
 `;
 
-const Dashboard = () => {
+const Dashboard = ({ isSidebarOpen }: DashboardProps) => {
   const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
+  const { palette } = useTheme();
+
   return (
-    <Box width="100%" height="100%" padding="0rem 2rem 4rem 2rem">
+    <Box
+      sx={{
+        width: "100%",
+        overflowX: "hidden",
+        padding: "2rem 1rem 4rem 1rem",
+        paddingLeft: isSidebarOpen ? "20px" : "20px",
+        paddingRight: isSidebarOpen ? "20px" : "20px",
+        transition: "padding-left 0.3s ease",
+      }}
+    >
+      {/* Grid */}
       <Box
-        width="100%"
-        height="100%"
         display="grid"
+        width="100%"
         gap="1.5rem"
         sx={
           isAboveMediumScreens
             ? {
                 gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
-                gridTemplateRows: "repeat(10, minmax(60px, 1fr))",
+                gridTemplateRows: "repeat(10, 60px)",
                 gridTemplateAreas: gridTemplateLargeScreens,
               }
             : {
                 gridAutoColumns: "1fr",
-                gridAutoRows: "80px",
+                gridAutoRows: "100px",
                 gridTemplateAreas: gridTemplateSmallScreens,
               }
         }
