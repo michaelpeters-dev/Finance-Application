@@ -77,7 +77,12 @@ const Sidebar = ({
       >
         {isOpen && (
           <div className="flex items-center gap-3 z-10 pl-1">
-            <img src={logo} alt="Logo" className="w-10" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-10 drop-shadow-[0_0_4px_rgba(255,255,255,0.7)]"
+            />
+
             <span className="text-lg font-semibold whitespace-nowrap translate-y-[1px]">
               Finance App
             </span>

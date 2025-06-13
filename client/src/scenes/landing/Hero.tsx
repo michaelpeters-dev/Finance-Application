@@ -70,7 +70,7 @@ const Hero = () => {
                 },
               }}
             >
-              Get For Free
+              Try Now
             </Button>
           </Link>
         </div>

@@ -50,7 +50,7 @@ const LandingNavbar = () => {
                   },
                 }}
               >
-                <Link to="/dashboard">Get For Free</Link>
+                <Link to="/dashboard">Try For Free</Link>
               </Button>
             </nav>
 
