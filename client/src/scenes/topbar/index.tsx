@@ -7,8 +7,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { Bell, Settings, User, Search as SearchIcon } from "lucide-react";
-import toast from "react-hot-toast";
-
 import BellPopup from "@/scenes/topbar/BellPopup";
 import SettingsPopup from "@/scenes/topbar/SettingsPopup";
 import UserPopup from "@/scenes/topbar/UserPopup";
