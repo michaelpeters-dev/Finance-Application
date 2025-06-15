@@ -187,6 +187,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
       <ConfirmationSnackbar
         open={openSnackbar}
         onClose={() => setOpenSnackbar(false)}
+        message="Data has been refreshed succesfully"
       />
     </Box>
   );

@@ -3,9 +3,14 @@ import { Box, Snackbar, useTheme } from "@mui/material";
 interface ConfirmationSnackbarProps {
   open: boolean;
   onClose: () => void;
+  message: string;
 }
 
-const ConfirmationSnackbar = ({ open, onClose }: ConfirmationSnackbarProps) => {
+const ConfirmationSnackbar = ({
+  open,
+  onClose,
+  message,
+}: ConfirmationSnackbarProps) => {
   const { palette } = useTheme();
 
   return (
@@ -26,7 +31,7 @@ const ConfirmationSnackbar = ({ open, onClose }: ConfirmationSnackbarProps) => {
           fontWeight: 600,
         }}
       >
-        Data has been refreshed successfully.
+        {message}
       </Box>
     </Snackbar>
   );

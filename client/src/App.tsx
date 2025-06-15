@@ -9,6 +9,7 @@ import Sidebar from "./scenes/sidebar";
 import Topbar from "@/scenes/topbar";
 import LinearRegression from "@/scenes/linearregression";
 import MyData from "./scenes/mydata";
+import NewData from "./scenes/newdata";
 
 function AppContent() {
   const location = useLocation();
@@ -40,7 +41,11 @@ function AppContent() {
                 element={<Dashboard isSidebarOpen={isSidebarOpen} />}
               />
               <Route path="/linearregression" element={<LinearRegression />} />
-              <Route path="/mydata" element={<MyData />} />
+              <Route
+                path="/mydata"
+                element={<MyData isSidebarOpen={isSidebarOpen} />}
+              />
+              <Route path="/newdata" element={<NewData />} />
             </Routes>
           </Box>
         </Box>
