@@ -64,6 +64,7 @@ const UploadToolbar = ({ onSelectFile, onUploadClick }: UploadToolbarProps) => {
             fontWeight: 600,
             px: "1.5rem",
             py: "0.4rem",
+            mr: "1rem",
             borderRadius: "6px",
             textTransform: "none",
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
