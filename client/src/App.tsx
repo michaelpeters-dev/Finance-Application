@@ -45,7 +45,10 @@ function AppContent() {
                 path="/mydata"
                 element={<MyData isSidebarOpen={isSidebarOpen} />}
               />
-              <Route path="/newdata" element={<NewData />} />
+              <Route
+                path="/newdata"
+                element={<NewData isSidebarOpen={isSidebarOpen} />}
+              />
             </Routes>
           </Box>
         </Box>
