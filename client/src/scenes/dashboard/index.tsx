@@ -82,7 +82,7 @@ const Dashboard = ({ isSidebarOpen }: DashboardProps) => {
               }
             : {
                 gridAutoColumns: "1fr",
-                gridAutoRows: "100px",
+                gridAutoRows: "70px",
                 gridTemplateAreas: gridTemplateSmallScreens,
               }
         }

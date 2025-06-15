@@ -8,7 +8,7 @@ import Landing from "@/scenes/landing";
 import Sidebar from "./scenes/sidebar";
 import Topbar from "@/scenes/topbar";
 import LinearRegression from "@/scenes/linearregression";
-import { Toaster } from "react-hot-toast";
+import MyData from "./scenes/mydata";
 
 function AppContent() {
   const location = useLocation();
@@ -40,6 +40,7 @@ function AppContent() {
                 element={<Dashboard isSidebarOpen={isSidebarOpen} />}
               />
               <Route path="/linearregression" element={<LinearRegression />} />
+              <Route path="/mydata" element={<MyData />} />
             </Routes>
           </Box>
         </Box>
