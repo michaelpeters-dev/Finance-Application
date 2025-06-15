@@ -18,7 +18,7 @@ import regression, { DataPoint } from "regression";
 
 const LinearRegression = () => {
   const { palette } = useTheme();
-  const [isLinearRegression, setIsLinearRegression] = useState(false);
+  const [showPrediction, setShowPrediction] = useState(false);
   const { data: kpiData } = useGetKpisQuery();
 
   const formattedData = useMemo(() => {
@@ -56,23 +56,22 @@ const LinearRegression = () => {
             <Typography variant="h3" gutterBottom>
               Annual Revenue Projection
             </Typography>
-            <Typography variant="h6" color={`${palette.grey[700]}`}>
+            <Typography variant="h6" color={palette.grey[700]}>
               Charted revenue and predicted revenue based on a simple linear
               regression model
             </Typography>
           </Box>
           <Button
-            onClick={() => setIsLinearRegression(!isLinearRegression)}
+            onClick={() => setShowPrediction(!showPrediction)}
             sx={{
               color: palette.grey[900],
-              backgroundColor: palette.grey[700],
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+              backgroundColor: palette.grey[400],
               "&:hover": {
-                backgroundColor: palette.grey[600],
+                backgroundColor: palette.grey[300],
               },
             }}
           >
-            Show Predicted Revenue for Next Year
+            {showPrediction ? "Hide" : "Show"} Prediction
           </Button>
         </FlexBetween>
 
@@ -115,7 +114,7 @@ const LinearRegression = () => {
               strokeWidth={2}
               dot={false}
             />
-            {isLinearRegression && (
+            {showPrediction && (
               <Line
                 type="monotone"
                 dataKey="Predicted Revenue"

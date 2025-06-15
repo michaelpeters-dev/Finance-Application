@@ -10,6 +10,7 @@ import Topbar from "@/scenes/topbar";
 import LinearRegression from "@/scenes/linearregression";
 import MyData from "./scenes/mydata";
 import NewData from "./scenes/newdata";
+import PolynomialRegression from "./scenes/polynomialregression";
 
 function AppContent() {
   const location = useLocation();
@@ -41,6 +42,10 @@ function AppContent() {
                 element={<Dashboard isSidebarOpen={isSidebarOpen} />}
               />
               <Route path="/linearregression" element={<LinearRegression />} />
+              <Route
+                path="/polynomialregression"
+                element={<PolynomialRegression />}
+              />
               <Route
                 path="/mydata"
                 element={<MyData isSidebarOpen={isSidebarOpen} />}

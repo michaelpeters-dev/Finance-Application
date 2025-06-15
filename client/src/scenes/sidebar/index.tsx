@@ -33,6 +33,11 @@ const navSections = [
         path: "/linearregression",
         icon: <BarChart size={18} />,
       },
+      {
+        label: "Polynomial Regression",
+        path: "/polynomialregression",
+        icon: <BarChart size={18} />,
+      },
     ],
   },
   {

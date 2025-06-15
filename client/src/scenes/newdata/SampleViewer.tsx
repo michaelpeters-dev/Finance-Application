@@ -65,7 +65,8 @@ const SampleViewer = () => {
           whiteSpace: "pre-wrap",
           margin: "0 1rem 1rem 1rem",
           flexGrow: 1,
-          maxHeight: "570px",
+          minHeight: 0,
+          maxHeight: "550px",
           overflowY: "auto",
         }}
       >
