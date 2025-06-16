@@ -12,6 +12,7 @@ import MyData from "./scenes/mydata";
 import NewData from "./scenes/newdata";
 import PolynomialRegression from "./scenes/polynomialregression";
 import TimeSeriesForecast from "./scenes/timeseriesforecast";
+import AnomalyDetection from "./scenes/anomolydetection";
 
 function AppContent() {
   const location = useLocation();
@@ -51,6 +52,7 @@ function AppContent() {
                 path="/timeseriesforecast"
                 element={<TimeSeriesForecast />}
               />
+              <Route path="/anomolydetection" element={<AnomalyDetection />} />
               <Route
                 path="/mydata"
                 element={<MyData isSidebarOpen={isSidebarOpen} />}

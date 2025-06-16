@@ -43,6 +43,11 @@ const navSections = [
         path: "/timeseriesforecast",
         icon: <BarChart size={18} />,
       },
+      {
+        label: "Anomoly Detection",
+        path: "/anomolydetection",
+        icon: <BarChart size={18} />,
+      },
     ],
   },
   {
