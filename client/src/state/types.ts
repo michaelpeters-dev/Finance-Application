@@ -63,3 +63,4 @@ export interface MonthlyData {
   operationalExpenses: number;
   nonOperationalExpenses: number;
 }
+

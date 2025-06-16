@@ -38,6 +38,11 @@ const navSections = [
         path: "/polynomialregression",
         icon: <BarChart size={18} />,
       },
+      {
+        label: "Time Series Forecast",
+        path: "/timeseriesforecast",
+        icon: <BarChart size={18} />,
+      },
     ],
   },
   {

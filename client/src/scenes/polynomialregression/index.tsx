@@ -182,7 +182,7 @@ const PolynomialRegression = () => {
           >
             <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
             <XAxis dataKey="name" tickLine={false} style={{ fontSize: "12px" }}>
-              <Label value="Month" offset={-5} position="insideBottom" />
+              <Label value="Month" offset={5} position="insideBottom" />
             </XAxis>
             <YAxis
               domain={[10000, "dataMax"]}

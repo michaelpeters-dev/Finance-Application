@@ -11,6 +11,7 @@ import LinearRegression from "@/scenes/linearregression";
 import MyData from "./scenes/mydata";
 import NewData from "./scenes/newdata";
 import PolynomialRegression from "./scenes/polynomialregression";
+import TimeSeriesForecast from "./scenes/timeseriesforecast";
 
 function AppContent() {
   const location = useLocation();
@@ -45,6 +46,10 @@ function AppContent() {
               <Route
                 path="/polynomialregression"
                 element={<PolynomialRegression />}
+              />
+              <Route
+                path="/timeseriesforecast"
+                element={<TimeSeriesForecast />}
               />
               <Route
                 path="/mydata"
