@@ -8,6 +8,11 @@ import {
   HelpCircle,
   BarChart,
   Menu,
+  TrendingUp,
+  Activity,
+  Clock,
+  AlertTriangle,
+  Shield,
 } from "lucide-react";
 import logo from "/logo_rounded_borders.svg";
 import profile from "@/assets/images/guest.jpg";
@@ -31,22 +36,27 @@ const navSections = [
       {
         label: "Linear Regression",
         path: "/linearregression",
-        icon: <BarChart size={18} />,
+        icon: <TrendingUp size={18} />,
       },
       {
         label: "Polynomial Regression",
         path: "/polynomialregression",
-        icon: <BarChart size={18} />,
+        icon: <Activity size={18} />,
       },
       {
         label: "Time Series Forecast",
         path: "/timeseriesforecast",
-        icon: <BarChart size={18} />,
+        icon: <Clock size={18} />,
       },
       {
-        label: "Anomoly Detection",
+        label: "Anomaly Detection",
         path: "/anomolydetection",
-        icon: <BarChart size={18} />,
+        icon: <AlertTriangle size={18} />,
+      },
+      {
+        label: "Risk Prediction",
+        path: "/riskprediction",
+        icon: <Shield size={18} />,
       },
     ],
   },
