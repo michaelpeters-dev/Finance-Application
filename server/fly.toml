@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for server-bold-pine-6369 on 2025-06-06T10:25:20+02:00
+# fly.toml app configuration file generated for server-white-snow-9026 on 2025-06-06T10:25:20+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'server-bold-pine-6369'
+app = 'server-white-snow-9026'
 primary_region = 'jnb'
 
 [build]
