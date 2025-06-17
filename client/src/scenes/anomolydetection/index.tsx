@@ -91,7 +91,7 @@ const AnomalyDetectionZScore = () => {
         <FlexBetween mb="1.5rem" gap="1rem" flexWrap="wrap" alignItems="center">
           <Box>
             <Typography variant="h3" gutterBottom>
-              Revenue Anomaly Detection (Z-score)
+              Revenue Anomaly Detection
             </Typography>
             <Typography variant="h6" color={palette.grey[700]}>
               Highlights months with revenue anomalies based on z-score
