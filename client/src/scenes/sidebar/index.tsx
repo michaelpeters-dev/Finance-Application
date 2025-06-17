@@ -6,13 +6,13 @@ import {
   User,
   Calendar,
   HelpCircle,
-  BarChart,
   Menu,
   TrendingUp,
   Activity,
   Clock,
   AlertTriangle,
   Shield,
+  BrainCircuit,
 } from "lucide-react";
 import logo from "/logo_rounded_borders.svg";
 import profile from "@/assets/images/guest.jpg";
@@ -57,6 +57,11 @@ const navSections = [
         label: "Risk Prediction",
         path: "/riskprediction",
         icon: <Shield size={18} />,
+      },
+      {
+        label: "Smart Summary",
+        path: "/smartsummary",
+        icon: <BrainCircuit size={18} />,
       },
     ],
   },
