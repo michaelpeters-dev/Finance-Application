@@ -36,7 +36,7 @@ export const tokens = {
     500: "#8884d8",
   },
   background: {
-    navbar: "#d1d3da",     // <- NEW: for sidebar/topbar
+    navbar: "#d1d3da",
     light: "#2d2d34",
     main: "#1f2026",
   },

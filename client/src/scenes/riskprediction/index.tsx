@@ -195,7 +195,7 @@ const RiskPrediction = () => {
               margin={{ top: 20, right: 40, left: 10, bottom: 80 }}
               data={chartData}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[700]} />
+              <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
               <XAxis
                 dataKey="name"
                 interval={0}

@@ -6,9 +6,9 @@ import {
   useGetProductsQuery,
   useGetTransactionsQuery,
 } from "@/state/api";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const Row3 = () => {
@@ -25,10 +25,7 @@ const Row3 = () => {
       return Object.entries(kpiData[0].expensesByCategory).map(
         ([key, value]) => {
           return [
-            {
-              name: key,
-              value: value,
-            },
+            { name: key, value: value },
             {
               name: `${key} of Total`,
               value: totalExpenses - (value as number),
@@ -41,10 +38,8 @@ const Row3 = () => {
 
   const topExpenseCategory = useMemo(() => {
     if (!kpiData || !kpiData[0]?.expensesByCategory) return null;
-
     const totalExpenses = kpiData[0].totalExpenses;
     const categories = kpiData[0].expensesByCategory;
-
     if (!totalExpenses || Object.keys(categories).length === 0) return null;
 
     let topCategory = "";
@@ -62,11 +57,7 @@ const Row3 = () => {
   }, [kpiData]);
 
   const productColumns = [
-    {
-      field: "_id",
-      headerName: "id",
-      flex: 1,
-    },
+    { field: "_id", headerName: "id", flex: 1 },
     {
       field: "expense",
       headerName: "Expense",
@@ -82,16 +73,8 @@ const Row3 = () => {
   ];
 
   const transactionColumns = [
-    {
-      field: "_id",
-      headerName: "id",
-      flex: 1,
-    },
-    {
-      field: "buyer",
-      headerName: "Buyer",
-      flex: 0.67,
-    },
+    { field: "_id", headerName: "id", flex: 1 },
+    { field: "buyer", headerName: "Buyer", flex: 0.67 },
     {
       field: "amount",
       headerName: "Amount",
@@ -106,6 +89,28 @@ const Row3 = () => {
         (params.value as Array<string>).length,
     },
   ];
+
+  const [noteText, setNoteText] = useState(() => {
+    return (
+      localStorage.getItem("dashboard-notes") ||
+      `- Q1 focus: Improve user retention.\n- Finalize A/B test for homepage redesign.\n- Analyze churn data by segment\n- Schedule team sync with design team.\n- Reminder: Set KPI review meeting.`
+    );
+  });
+
+  const [isEditing, setIsEditing] = useState(false);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem("dashboard-notes", noteText);
+  }, [noteText]);
+
+  useEffect(() => {
+    if (isEditing && textAreaRef.current) {
+      const len = textAreaRef.current.value.length;
+      textAreaRef.current.focus();
+      textAreaRef.current.setSelectionRange(len, len);
+    }
+  }, [isEditing]);
 
   return (
     <>
@@ -181,13 +186,18 @@ const Row3 = () => {
         </Box>
       </DashboardBox>
 
-      <DashboardBox gridArea="i">
+      <DashboardBox gridArea="i" sx={{ mb: "-0.6rem" }}>
         <BoxHeader
           title="Expense Breakdown By Category"
           sideText={topExpenseCategory ?? "N/A"}
         />
-
-        <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
+        <FlexBetween
+          mt="0.5rem"
+          mb="0.5rem"
+          gap="0.5rem"
+          p="0 1rem"
+          textAlign="center"
+        >
           {pieChartData
             ?.filter((data) => data[0].name && data[0].name !== "$*")
             .map((data, i) => (
@@ -196,9 +206,9 @@ const Row3 = () => {
                   <Pie
                     stroke="none"
                     data={data}
-                    innerRadius={18}
-                    outerRadius={35}
-                    paddingAngle={2}
+                    innerRadius={15}
+                    outerRadius={32}
+                    paddingAngle={1}
                     dataKey="value"
                   >
                     {data.map((entry, index) => (
@@ -213,29 +223,99 @@ const Row3 = () => {
       </DashboardBox>
 
       <DashboardBox gridArea="j">
-        <BoxHeader
-          title="Overall Summary and Explanation Data"
-          sideText="+15%"
-        />
         <Box
-          height="15px"
-          margin="1.25rem 1rem 0.4rem 1rem"
-          bgcolor={palette.primary[800]}
-          borderRadius="1rem"
+          position="relative"
+          sx={{
+            width: "100%",
+            minHeight: "7rem",
+            paddingRight: "6rem",
+            paddingLeft: "1.1rem",
+            paddingTop: "0.3rem",
+            border: "none",
+            outline: "none",
+            resize: "none",
+            backgroundColor: "transparent",
+            color: "#ffffff",
+            fontSize: "0.94rem",
+            fontFamily: "inherit",
+            lineHeight: 1.6,
+            boxSizing: "border-box",
+          }}
         >
-          <Box
-            height="15px"
-            bgcolor={palette.primary[600]}
-            borderRadius="1rem"
-            width="40%"
-          ></Box>
+          <Button
+            onClick={() => setIsEditing(!isEditing)}
+            sx={{
+              position: "absolute",
+              top: "0.6rem",
+              right: "0.5rem",
+              backgroundColor: palette.grey[400],
+              color: palette.grey[900],
+              textTransform: "none",
+              fontWeight: 600,
+              borderRadius: "0.5rem",
+              px: "1.25rem",
+              py: "0.25rem",
+              zIndex: 10,
+              boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+              "&:hover": {
+                backgroundColor: palette.grey[300],
+              },
+            }}
+          >
+            {isEditing ? "Save" : "Edit"}
+          </Button>
+
+          {isEditing ? (
+            <Box
+              component="textarea"
+              ref={textAreaRef}
+              value={noteText}
+              onChange={(e) => setNoteText(e.target.value)}
+              placeholder="Notes..."
+              onKeyDown={(e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+                  setIsEditing(false);
+                }
+              }}
+              sx={{
+                width: "100%",
+                minHeight: "8.5rem",
+                paddingRight: "6rem",
+                paddingLeft: "0rem",
+                paddingTop: "0.5rem",
+                border: "none",
+                outline: "none",
+                resize: "none",
+                overflow: "hidden",
+                backgroundColor: "transparent",
+                color: "#ffffff",
+                fontSize: "0.94rem",
+                fontFamily: "inherit",
+                lineHeight: 1.6,
+                boxSizing: "border-box",
+              }}
+            />
+          ) : (
+            <Typography
+              variant="body1"
+              sx={{
+                whiteSpace: "pre-wrap",
+                color: "#ffffff",
+                fontSize: "0.94rem",
+                fontFamily: "inherit",
+                lineHeight: 1.6,
+                minHeight: "9rem",
+                paddingRight: "6rem",
+                paddingTop: "0.5rem",
+                boxSizing: "border-box",
+                cursor: "pointer",
+              }}
+              onClick={() => setIsEditing(true)}
+            >
+              {noteText || "Click to add notes..."}
+            </Typography>
+          )}
         </Box>
-        <Typography margin="0 1rem" variant="h6">
-          Orci aliquam enim vel diam. Venenatis euismod id donec mus lorem etiam
-          ullamcorper odio sed. Ipsum non sed gravida etiam urna egestas
-          molestie volutpat et. Malesuada quis pretium aliquet lacinia ornare
-          sed. In volutpat nullam at est id cum pulvinar nunc.
-        </Typography>
       </DashboardBox>
     </>
   );

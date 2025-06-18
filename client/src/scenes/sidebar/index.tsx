@@ -66,20 +66,8 @@ const navSections = [
     ],
   },
   {
-    title: "Advisors",
-    items: [
-      {
-        label: "Financial Agent",
-        path: "/financialagent",
-        icon: <User size={18} />,
-      },
-      {
-        label: "General Help Agent",
-        path: "/generalhelpagent",
-        icon: <Calendar size={18} />,
-      },
-      { label: "FAQ", path: "/faq", icon: <HelpCircle size={18} /> },
-    ],
+    title: "Help",
+    items: [{ label: "FAQ", path: "/faq", icon: <HelpCircle size={18} /> }],
   },
 ];
 
