@@ -8,28 +8,48 @@ const router = express.Router();
 router.post("/summary", async (req, res) => {
   const { prompt } = req.body;
 
+  if (!prompt) {
+    return res.status(400).json({ message: "Missing prompt" });
+  }
+
+  const apiUrl = process.env.GROQ_API_URL;
+  const apiKey = process.env.GROQ_API_KEY;
+
+  if (!apiUrl || !apiKey) {
+    return res
+      .status(500)
+      .json({ message: "Missing GROQ_API_URL or GROQ_API_KEY" });
+  }
+
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_GROQ_API_URL}`,
+      apiUrl,
       {
-        model: "mixtral-8x7b-32768",
+        model: "llama3-70b-8192",
         messages: [
-          { role: "system", content: "..." },
+          { role: "system", content: "You are a helpful assistant." },
           { role: "user", content: prompt },
         ],
       },
       {
         headers: {
-          Authorization: `Bearer ${yourGroqAPIKey}`,
+          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
       }
     );
 
-    res.json({ result: response.data.choices[0].message.content });
+    const content = response.data.choices?.[0]?.message?.content;
+
+    if (!content) {
+      return res.status(500).json({ message: "No content returned" });
+    }
+
+    res.status(200).json({ result: content });
   } catch (error) {
-    console.error("Groq API error:", error.response?.data || error.message);
-    res.status(500).json({ error: "Failed to fetch AI insight" });
+    const status = error.response?.status || 500;
+    const message = error.response?.data?.error?.message || error.message;
+    res.status(status).json({ message });
   }
 });
 
