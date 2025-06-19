@@ -121,7 +121,7 @@ const Row1 = () => {
         gridArea="a"
         sx={{
           minHeight: { xs: "480px", sm: "480px", md: "auto" },
-          pb: "1.5rem",
+          pb: { xs: "1.5rem", sm: "1.5rem", md: 0 },
         }}
       >
         <BoxHeader
@@ -203,7 +203,7 @@ const Row1 = () => {
         gridArea="b"
         sx={{
           minHeight: { xs: "480px", sm: "480px", md: "auto" },
-          pb: "1.5rem",
+          pb: { xs: "1.5rem", sm: "1.5rem", md: 0 },
         }}
       >
         <BoxHeader
