@@ -135,7 +135,7 @@ const Row1 = () => {
           subtitle="Top line represents revenue, bottom line represents expenses"
           sideText={revenueGrowth || "N/A"}
         />
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height={300}>
           <AreaChart
             width={500}
             height={400}
@@ -220,7 +220,7 @@ const Row1 = () => {
           subtitle="Purple line represents revenue, green line represents revenue"
           sideText={latestProfitMargin || "N/A"}
         />
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height={300}>
           <LineChart
             width={500}
             height={400}
