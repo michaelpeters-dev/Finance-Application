@@ -116,7 +116,7 @@ const Row3 = () => {
     <>
       <DashboardBox
         gridArea="g"
-        sx={{ minHeight: { xs: "275px", md: "auto" } }}
+        sx={{ minHeight: { xs: "310px", sm: "310px", md: "auto" } }}
       >
         <BoxHeader
           title="List of Products"
@@ -155,7 +155,7 @@ const Row3 = () => {
 
       <DashboardBox
         gridArea="h"
-        sx={{ minHeight: { xs: "275px", md: "auto" } }}
+        sx={{ minHeight: { xs: "310px", sm: "310px", md: "auto" } }}
       >
         <BoxHeader
           title="Recent Orders"
@@ -194,7 +194,7 @@ const Row3 = () => {
 
       <DashboardBox
         gridArea="i"
-        sx={{ mb: "-0.6rem", minHeight: { xs: "240px", md: "auto" } }}
+        sx={{ minHeight: { xs: "260px", sm: "260px", md: "auto" } }}
       >
         <BoxHeader
           title="Expense Breakdown By Category"
@@ -234,7 +234,7 @@ const Row3 = () => {
       <DashboardBox
         gridArea="j"
         sx={{
-          minHeight: { xs: "180px", md: "auto" },
+          minHeight: { xs: "220px", sm: "220px", md: "auto" },
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",

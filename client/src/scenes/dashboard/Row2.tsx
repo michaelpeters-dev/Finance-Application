@@ -182,7 +182,7 @@ const Row2 = () => {
     <>
       <DashboardBox
         gridArea="d"
-        sx={{ minHeight: { xs: "350px", md: "auto" } }}
+        sx={{ minHeight: { xs: "390px", sm: "390px", md: "auto" } }}
       >
         <BoxHeader
           title="Operational vs Non-Operational Expenses"
@@ -237,7 +237,7 @@ const Row2 = () => {
 
       <DashboardBox
         gridArea="e"
-        sx={{ minHeight: { xs: "300px", md: "auto" } }}
+        sx={{ minHeight: { xs: "340px", sm: "340px", md: "auto" } }}
       >
         <BoxHeader
           title="Campaigns and Targets"
@@ -296,7 +296,7 @@ const Row2 = () => {
 
       <DashboardBox
         gridArea="f"
-        sx={{ minHeight: { xs: "300px", md: "auto" } }}
+        sx={{ minHeight: { xs: "340px", sm: "340px", md: "auto" } }}
       >
         <BoxHeader
           title="Product Prices vs Expenses"

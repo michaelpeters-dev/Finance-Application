@@ -119,9 +119,7 @@ const Row1 = () => {
     <>
       <DashboardBox
         gridArea="a"
-        sx={{
-          minHeight: { xs: "400px", md: "auto" }, // small screens
-        }}
+        sx={{ minHeight: { xs: "440px", sm: "440px", md: "auto" } }}
       >
         <BoxHeader
           title="Revenue and Expenses"
@@ -200,9 +198,7 @@ const Row1 = () => {
 
       <DashboardBox
         gridArea="b"
-        sx={{
-          minHeight: { xs: "400px", md: "auto" }, // small screens
-        }}
+        sx={{ minHeight: { xs: "440px", sm: "440px", md: "auto" } }}
       >
         <BoxHeader
           title="Profit and Revenue"
@@ -265,9 +261,7 @@ const Row1 = () => {
 
       <DashboardBox
         gridArea="c"
-        sx={{
-          minHeight: { xs: "300px", md: "auto" }, // small screens
-        }}
+        sx={{ minHeight: { xs: "340px", sm: "340px", md: "auto" } }}
       >
         <BoxHeader
           title="Revenue Month by Month"
