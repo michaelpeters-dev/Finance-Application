@@ -121,7 +121,13 @@ const Row1 = () => {
         gridArea="a"
         sx={{
           minHeight: { xs: "480px", sm: "480px", md: "auto" },
-          pb: { xs: "1.5rem", sm: "1.5rem", md: 0 },
+          pb: {
+            xs: "3rem",
+            sm: "2.5rem",
+            md: 0,
+            "@media (min-width: 1400px) and (max-width: 2560px)": "1.5rem",
+            "@media (min-width: 2560px)": "1.5rem",
+          },
         }}
       >
         <BoxHeader
@@ -203,7 +209,13 @@ const Row1 = () => {
         gridArea="b"
         sx={{
           minHeight: { xs: "480px", sm: "480px", md: "auto" },
-          pb: { xs: "1.5rem", sm: "1.5rem", md: 0 },
+          pb: {
+            xs: "3rem",
+            sm: "2.5rem",
+            md: 0,
+            "@media (min-width: 1400px) and (max-width: 2560px)": "1.5rem",
+            "@media (min-width: 2560px)": "1.5rem",
+          },
         }}
       >
         <BoxHeader
