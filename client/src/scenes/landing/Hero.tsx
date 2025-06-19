@@ -47,31 +47,83 @@ const Hero = () => {
         {/* Button */}
         <div className="flex justify-center mt-6 sm:mt-8 px-4">
           <Link to="/dashboard">
-            <Button
-              sx={{
-                backgroundColor: "white",
-                color: "black",
-                textTransform: "none",
-                padding: {
-                  xs: "0.5rem 1.25rem",
-                  sm: "0.5rem 1.5rem",
-                  md: "0.5rem 2rem",
-                },
-                borderRadius: "0.5rem",
-                fontWeight: 500,
-                fontSize: {
-                  xs: "0.875rem",
-                  sm: "1rem",
-                  md: "1.125rem",
-                },
-                boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
-                "&:hover": {
-                  backgroundColor: "#f0f0f0",
-                },
-              }}
-            >
-              Try Now
-            </Button>
+            <div style={{ position: "relative", display: "inline-block" }}>
+              {/* Glow ring */}
+              <motion.div
+                initial={{ opacity: 0.5, scale: 1 }}
+                animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.3, 1] }}
+                transition={{
+                  duration: 1.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  position: "absolute",
+                  top: "-10px",
+                  left: "-10px",
+                  right: "-10px",
+                  bottom: "-10px",
+                  borderRadius: "12px",
+                  background:
+                    "radial-gradient(circle, rgba(255,255,255,0.3), transparent)",
+                  zIndex: 0,
+                  filter: "blur(12px)",
+                }}
+              />
+
+              {/* Actual Button */}
+              <motion.div
+                initial={{ boxShadow: "0 0 20px rgba(255, 255, 255, 0.2)" }}
+                animate={{
+                  boxShadow: [
+                    "0 0 25px rgba(255, 255, 255, 0.3)",
+                    "0 0 45px rgba(255, 255, 255, 0.6)",
+                    "0 0 25px rgba(255, 255, 255, 0.3)",
+                  ],
+                }}
+                whileTap={{
+                  scale: 0.95,
+                  boxShadow: "0 0 10px rgba(255, 255, 255, 0.4)",
+                }}
+                transition={{
+                  duration: 1.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  display: "inline-block",
+                  borderRadius: "8px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                <Button
+                  sx={{
+                    backgroundColor: "white",
+                    color: "black",
+                    textTransform: "none",
+                    padding: {
+                      xs: "0.5rem 1.25rem",
+                      sm: "0.5rem 1.5rem",
+                      md: "0.5rem 2rem",
+                    },
+                    borderRadius: "0.5rem",
+                    fontWeight: 500,
+                    fontSize: {
+                      xs: "0.875rem",
+                      sm: "1rem",
+                      md: "1.125rem",
+                    },
+                    boxShadow: "none",
+                    "&:hover": {
+                      backgroundColor: "#f0f0f0",
+                    },
+                  }}
+                >
+                  Try Now
+                </Button>
+              </motion.div>
+            </div>
           </Link>
         </div>
       </div>
