@@ -198,7 +198,10 @@ const Row1 = () => {
 
       <DashboardBox
         gridArea="b"
-        sx={{ minHeight: { xs: "480px", sm: "480px", md: "auto" } }}
+        sx={{
+          minHeight: { xs: "480px", sm: "480px", md: "auto" },
+          pb: "1.75rem",
+        }}
       >
         <BoxHeader
           title="Profit and Revenue"
