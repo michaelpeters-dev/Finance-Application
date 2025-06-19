@@ -93,7 +93,7 @@ const Row3 = () => {
   const [noteText, setNoteText] = useState(() => {
     return (
       localStorage.getItem("dashboard-notes") ||
-      `- Q1 focus: Improve user retention.\n- Finalize A/B test for homepage redesign.\n- Analyze churn data by segment\n- Schedule team sync with design team.`
+      `- Q1 focus: Improve user retention.\n- Finalize A/B test for homepage redesign.\n- Analyze churn data by segment\n- Schedule team sync with design team.\n- Reminder: Set KPI review meeting.`
     );
   });
 
@@ -248,7 +248,7 @@ const Row3 = () => {
             sx={{
               position: "absolute",
               top: "-1.3rem",
-              right: "0.5rem",
+              right: "0.8rem",
               backgroundColor: palette.grey[400],
               color: palette.grey[900],
               textTransform: "none",

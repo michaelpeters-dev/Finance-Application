@@ -1,3 +1,4 @@
+// src/scenes/Dashboard/index.tsx
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import Row1 from "./Row1";
 import Row2 from "./Row2";
@@ -61,29 +62,31 @@ const Dashboard = ({ isSidebarOpen }: DashboardProps) => {
     <Box
       sx={{
         width: "100%",
-        overflowX: "hidden",
+        maxWidth: "100vw",
+        minHeight: "100vh", // Ensures it fills the page height
         padding: "2rem 1rem 4rem 1rem",
         paddingLeft: isSidebarOpen ? "20px" : "20px",
         paddingRight: isSidebarOpen ? "20px" : "20px",
         transition: "padding-left 0.3s ease",
+        overflowX: "hidden", // Prevent horizontal scroll
+        overflowY: "visible", // Allow natural vertical scrolling
       }}
     >
-      {/* Grid */}
       <Box
         display="grid"
-        width="100%"
-        gap="1.5rem"
         sx={
           isAboveMediumScreens
             ? {
-                gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
+                gridTemplateColumns: "repeat(3, minmax(300px, 1fr))",
                 gridTemplateRows: "repeat(10, 60px)",
                 gridTemplateAreas: gridTemplateLargeScreens,
+                gap: "1.5rem",
               }
             : {
                 gridAutoColumns: "1fr",
                 gridAutoRows: "70px",
                 gridTemplateAreas: gridTemplateSmallScreens,
+                gap: "1.5rem",
               }
         }
       >
