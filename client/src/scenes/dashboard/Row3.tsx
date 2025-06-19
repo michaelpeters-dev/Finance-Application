@@ -203,8 +203,8 @@ const Row3 = () => {
         <FlexBetween
           mt="0.5rem"
           mb="0.5rem"
-          gap="0.5rem"
-          p="0 1rem"
+          gap="2.4rem"
+          p="0 -2rem"
           textAlign="center"
         >
           {pieChartData
