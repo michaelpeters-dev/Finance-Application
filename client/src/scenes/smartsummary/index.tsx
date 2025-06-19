@@ -59,7 +59,7 @@ Embed numerical evidence where appropriate, and ensure every metric is paired wi
 Strict formatting requirements:
 - Return **only** the five markdown-formatted bullet paragraphs (no headings, titles, or extra lines)
 - Separate each bullet paragraph with a **single empty line**
-- The overall output should total **approximately 700 words and not more than 710**
+- The overall output should total **approximately 300**
 
 This is not a descriptive summary — it is a professional internal risk briefing. Do not use redundant language, use more direct capital calls, and link between the metrics if. Write as if your output will inform capital provisioning, solvency recalibration, or internal model governance under ORSA or Pillar II reporting. Each paragraph must provide material justification for financial interpretation or decision-making under uncertainty.
 `;
