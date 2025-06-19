@@ -15,6 +15,7 @@ import TimeSeriesForecast from "./scenes/timeseriesforecast";
 import AnomalyDetection from "./scenes/anomolydetection";
 import RiskPrediction from "./scenes/riskprediction";
 import SmartSummary from "./scenes/smartsummary";
+import FAQ from "./scenes/faq";
 
 function AppContent() {
   const location = useLocation();
@@ -45,6 +46,14 @@ function AppContent() {
                 path="/dashboard"
                 element={<Dashboard isSidebarOpen={isSidebarOpen} />}
               />
+              <Route
+                path="/mydata"
+                element={<MyData isSidebarOpen={isSidebarOpen} />}
+              />
+              <Route
+                path="/newdata"
+                element={<NewData isSidebarOpen={isSidebarOpen} />}
+              />
               <Route path="/linearregression" element={<LinearRegression />} />
               <Route
                 path="/polynomialregression"
@@ -57,14 +66,7 @@ function AppContent() {
               <Route path="/anomolydetection" element={<AnomalyDetection />} />
               <Route path="/riskprediction" element={<RiskPrediction />} />
               <Route path="/smartsummary" element={<SmartSummary />} />
-              <Route
-                path="/mydata"
-                element={<MyData isSidebarOpen={isSidebarOpen} />}
-              />
-              <Route
-                path="/newdata"
-                element={<NewData isSidebarOpen={isSidebarOpen} />}
-              />
+              <Route path="/faq" element={<FAQ />} />
             </Routes>
           </Box>
         </Box>

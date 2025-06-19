@@ -93,7 +93,7 @@ const Row3 = () => {
   const [noteText, setNoteText] = useState(() => {
     return (
       localStorage.getItem("dashboard-notes") ||
-      `- Q1 focus: Improve user retention.\n- Finalize A/B test for homepage redesign.\n- Analyze churn data by segment\n- Schedule team sync with design team.\n- Reminder: Set KPI review meeting.`
+      `- Q1 focus: Improve user retention.\n- Finalize A/B test for homepage redesign.\n- Analyze churn data by segment\n- Schedule team sync with design team.`
     );
   });
 
@@ -223,6 +223,7 @@ const Row3 = () => {
       </DashboardBox>
 
       <DashboardBox gridArea="j">
+        <BoxHeader title="Quick Notes" sideText="" />
         <Box
           position="relative"
           sx={{
@@ -235,7 +236,7 @@ const Row3 = () => {
             outline: "none",
             resize: "none",
             backgroundColor: "transparent",
-            color: "#ffffff",
+            color: palette.grey[400],
             fontSize: "0.94rem",
             fontFamily: "inherit",
             lineHeight: 1.6,
@@ -246,7 +247,7 @@ const Row3 = () => {
             onClick={() => setIsEditing(!isEditing)}
             sx={{
               position: "absolute",
-              top: "0.6rem",
+              top: "-1.3rem",
               right: "0.5rem",
               backgroundColor: palette.grey[400],
               color: palette.grey[900],
@@ -288,8 +289,8 @@ const Row3 = () => {
                 resize: "none",
                 overflow: "hidden",
                 backgroundColor: "transparent",
-                color: "#ffffff",
-                fontSize: "0.94rem",
+                color: `${palette.grey[700]}`,
+                fontSize: "0.8rem",
                 fontFamily: "inherit",
                 lineHeight: 1.6,
                 boxSizing: "border-box",
@@ -300,8 +301,8 @@ const Row3 = () => {
               variant="body1"
               sx={{
                 whiteSpace: "pre-wrap",
-                color: "#ffffff",
-                fontSize: "0.94rem",
+                color: `${palette.grey[700]}`,
+                fontSize: "0.8rem",
                 fontFamily: "inherit",
                 lineHeight: 1.6,
                 minHeight: "9rem",
