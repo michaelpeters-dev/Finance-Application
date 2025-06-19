@@ -235,9 +235,10 @@ const Row3 = () => {
         gridArea="j"
         sx={{
           minHeight: { xs: "220px", sm: "220px", md: "auto" },
-          overflow: "hidden",
           display: "flex",
           flexDirection: "column",
+          overflowY: "auto", // ✅ enables vertical scroll for notes only
+          maxHeight: { xs: "340px", sm: "340px", md: "360px" }, // ✅ caps height so scroll is possible
         }}
       >
         <BoxHeader title="Quick Notes" sideText="" />
@@ -245,13 +246,9 @@ const Row3 = () => {
           position="relative"
           sx={{
             width: "100%",
-            minHeight: "7rem",
             paddingRight: "6rem",
             paddingLeft: "1.1rem",
             paddingTop: "0.3rem",
-            border: "none",
-            outline: "none",
-            resize: "none",
             backgroundColor: "transparent",
             color: palette.grey[400],
             fontSize: "0.94rem",
@@ -298,13 +295,14 @@ const Row3 = () => {
               sx={{
                 width: "100%",
                 minHeight: "8.5rem",
+                maxHeight: "16rem",
                 paddingRight: "6rem",
                 paddingLeft: "0rem",
                 paddingTop: "0.5rem",
                 border: "none",
                 outline: "none",
                 resize: "none",
-                overflow: "hidden",
+                overflowY: "auto",
                 backgroundColor: "transparent",
                 color: `${palette.grey[700]}`,
                 fontSize: "0.8rem",
