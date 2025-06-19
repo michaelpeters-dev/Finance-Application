@@ -114,7 +114,10 @@ const Row3 = () => {
 
   return (
     <>
-      <DashboardBox gridArea="g">
+      <DashboardBox
+        gridArea="g"
+        sx={{ minHeight: { xs: "275px", md: "auto" } }}
+      >
         <BoxHeader
           title="List of Products"
           sideText={`${productData?.length} products`}
@@ -150,7 +153,10 @@ const Row3 = () => {
         </Box>
       </DashboardBox>
 
-      <DashboardBox gridArea="h">
+      <DashboardBox
+        gridArea="h"
+        sx={{ minHeight: { xs: "275px", md: "auto" } }}
+      >
         <BoxHeader
           title="Recent Orders"
           sideText={`${transactionData?.length} latest transactions`}
@@ -186,7 +192,10 @@ const Row3 = () => {
         </Box>
       </DashboardBox>
 
-      <DashboardBox gridArea="i" sx={{ mb: "-0.6rem" }}>
+      <DashboardBox
+        gridArea="i"
+        sx={{ mb: "-0.6rem", minHeight: { xs: "240px", md: "auto" } }}
+      >
         <BoxHeader
           title="Expense Breakdown By Category"
           sideText={topExpenseCategory ?? "N/A"}
@@ -222,7 +231,15 @@ const Row3 = () => {
         </FlexBetween>
       </DashboardBox>
 
-      <DashboardBox gridArea="j">
+      <DashboardBox
+        gridArea="j"
+        sx={{
+          minHeight: { xs: "180px", md: "auto" },
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <BoxHeader title="Quick Notes" sideText="" />
         <Box
           position="relative"

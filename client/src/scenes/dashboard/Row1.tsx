@@ -117,7 +117,12 @@ const Row1 = () => {
 
   return (
     <>
-      <DashboardBox gridArea="a">
+      <DashboardBox
+        gridArea="a"
+        sx={{
+          minHeight: { xs: "400px", md: "auto" }, // small screens
+        }}
+      >
         <BoxHeader
           title="Revenue and Expenses"
           subtitle="Top line represents revenue, bottom line represents expenses"
@@ -193,7 +198,12 @@ const Row1 = () => {
         </ResponsiveContainer>
       </DashboardBox>
 
-      <DashboardBox gridArea="b">
+      <DashboardBox
+        gridArea="b"
+        sx={{
+          minHeight: { xs: "400px", md: "auto" }, // small screens
+        }}
+      >
         <BoxHeader
           title="Profit and Revenue"
           subtitle="Purple line represents revenue, green line represents revenue"
@@ -253,7 +263,12 @@ const Row1 = () => {
         </ResponsiveContainer>
       </DashboardBox>
 
-      <DashboardBox gridArea="c">
+      <DashboardBox
+        gridArea="c"
+        sx={{
+          minHeight: { xs: "300px", md: "auto" }, // small screens
+        }}
+      >
         <BoxHeader
           title="Revenue Month by Month"
           subtitle="Graph representing the revenue month by month"

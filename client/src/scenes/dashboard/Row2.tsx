@@ -180,7 +180,10 @@ const Row2 = () => {
 
   return (
     <>
-      <DashboardBox gridArea="d">
+      <DashboardBox
+        gridArea="d"
+        sx={{ minHeight: { xs: "350px", md: "auto" } }}
+      >
         <BoxHeader
           title="Operational vs Non-Operational Expenses"
           sideText={operationalExpenseRatio || "N/A"}
@@ -232,7 +235,10 @@ const Row2 = () => {
         </ResponsiveContainer>
       </DashboardBox>
 
-      <DashboardBox gridArea="e">
+      <DashboardBox
+        gridArea="e"
+        sx={{ minHeight: { xs: "300px", md: "auto" } }}
+      >
         <BoxHeader
           title="Campaigns and Targets"
           sideText={
@@ -288,7 +294,10 @@ const Row2 = () => {
         </FlexBetween>
       </DashboardBox>
 
-      <DashboardBox gridArea="f">
+      <DashboardBox
+        gridArea="f"
+        sx={{ minHeight: { xs: "300px", md: "auto" } }}
+      >
         <BoxHeader
           title="Product Prices vs Expenses"
           sideText={avgProductProfitMargin ?? "N/A"}
