@@ -99,6 +99,7 @@ This is not a descriptive summary — it is a professional internal risk briefin
         borderRadius="12px"
         bgcolor={palette.grey[800]}
         boxShadow="0 0 8px rgba(0, 0, 0, 0.15)"
+        sx={{ overflowY: "auto" }}
       >
         <FlexBetween mb="1.5rem" gap="1rem" flexWrap="wrap">
           <Box>
