@@ -77,7 +77,10 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
     <Box
       sx={{
         width: "100%",
+        maxWidth: "100vw",
+        minHeight: "100vh",
         overflowX: "hidden",
+        overflowY: "visible",
         padding: "2rem 1rem 4rem 1rem",
         paddingLeft: isSidebarOpen ? "20px" : "20px",
         paddingRight: isSidebarOpen ? "20px" : "20px",
@@ -87,12 +90,11 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
       <Box
         display="grid"
         width="100%"
-        height="calc(100vh - 180px)"
         gap="1.5rem"
         sx={
           isAboveMediumScreens
             ? {
-                gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
                 gridTemplateRows: "auto auto 1fr",
                 gridTemplateAreas: gridTemplateLargeScreens,
               }
