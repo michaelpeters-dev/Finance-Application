@@ -209,12 +209,9 @@ const Row1 = () => {
         gridArea="b"
         sx={{
           minHeight: { xs: "480px", sm: "480px", md: "auto" },
-          pb: {
-            xs: "3rem",
-            sm: "2.5rem",
-            md: 0,
-            "@media (min-width: 1400px) and (max-width: 2560px)": "1.5rem",
-            "@media (min-width: 2880px)": "1.5rem",
+          pb: { xs: "3rem", sm: "2.5rem", md: 0 },
+          "@media (min-width: 2560px)": {
+            pb: "2rem",
           },
         }}
       >
