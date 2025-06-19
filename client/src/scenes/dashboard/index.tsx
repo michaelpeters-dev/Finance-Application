@@ -62,29 +62,28 @@ const Dashboard = ({ isSidebarOpen }: DashboardProps) => {
       sx={{
         width: "100%",
         maxWidth: "100vw",
-        height: "100vh",
-        overflow: "hidden",
-        padding: "2rem 1rem",
+        minHeight: "100vh", // Ensures page fills height
+        padding: "2rem 1rem 4rem 1rem",
         paddingLeft: isSidebarOpen ? "20px" : "20px",
         paddingRight: isSidebarOpen ? "20px" : "20px",
-        boxSizing: "border-box",
+        transition: "padding-left 0.3s ease",
+        overflowX: "hidden", // horizontal scroll prevented
+        overflowY: "visible", // no vertical restriction
       }}
     >
       <Box
         display="grid"
-        width="100%"
-        height="93%"
         sx={
           isAboveMediumScreens
             ? {
                 gridTemplateColumns: "repeat(3, minmax(300px, 1fr))",
-                gridAutoRows: "1fr",
+                gridTemplateRows: "repeat(10, 60px)",
                 gridTemplateAreas: gridTemplateLargeScreens,
                 gap: "1.5rem",
               }
             : {
                 gridAutoColumns: "1fr",
-                gridAutoRows: "auto",
+                gridAutoRows: "70px",
                 gridTemplateAreas: gridTemplateSmallScreens,
                 gap: "1.5rem",
               }
