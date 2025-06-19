@@ -214,7 +214,7 @@ const Row1 = () => {
             sm: "2.5rem",
             md: 0,
             "@media (min-width: 1400px) and (max-width: 2560px)": "1.5rem",
-            "@media (min-width: 2560px)": "1.5rem",
+            "@media (min-width: 2880px)": "1.5rem",
           },
         }}
       >
