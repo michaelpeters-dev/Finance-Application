@@ -8,7 +8,7 @@ import {
 } from "@/state/api";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const Row3 = () => {

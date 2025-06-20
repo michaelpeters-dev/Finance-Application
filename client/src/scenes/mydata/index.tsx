@@ -1,5 +1,5 @@
 import { Box, Snackbar, useMediaQuery, useTheme } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   useGetKpisQuery,
   useGetProductsQuery,

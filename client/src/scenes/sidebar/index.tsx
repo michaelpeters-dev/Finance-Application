@@ -3,8 +3,6 @@ import {
   Home,
   Users,
   Contact,
-  User,
-  Calendar,
   HelpCircle,
   Menu,
   TrendingUp,
