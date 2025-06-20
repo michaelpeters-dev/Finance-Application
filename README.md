@@ -4,6 +4,38 @@
 
 ![Dashboard Preview](./client/public/app-screen.png)
 
+## Complete App Screenshots
+
+<details>
+<summary>Click to view the full gallery of the Finance App's screens</summary>
+
+<div style="display: flex; overflow-x: auto; gap: 12px; padding: 16px 0;">
+
+  <!-- Landing Pages -->
+  <img src="./client/public/landinghero-screen.png" width="400" alt="Landing - Hero Section" />
+  <img src="./client/public/landingfeatures-screen.png" width="400" alt="Landing - Features Section" />
+  <img src="./client/public/landingfaq-screen.png" width="400" alt="Landing - FAQ Section" />
+  <img src="./client/public/landingcontact-screen.png" width="400" alt="Landing - Contact Section" />
+
+  <!-- Core Dashboard -->
+  <img src="./client/public/app-screen.png" width="400" alt="Main Dashboard Overview" />
+  <img src="./client/public/mydata-screen.png" width="400" alt="My Data Table View" />
+  <img src="./client/public/uploadnewdata-screen.png" width="400" alt="Upload New Data Screen" />
+
+  <!-- ML Visualizations -->
+  <img src="./client/public/linearregression-screen.png" width="400" alt="Linear Regression Graph" />
+  <img src="./client/public/polynomialregression-screen.png" width="400" alt="Polynomial Regression Graph" />
+  <img src="./client/public/timeseriesforecast-screen.png" width="400" alt="Time Series Forecast (ARIMA)" />
+  <img src="./client/public/riskpredictionlabel-screen.png" width="400" alt="Risk Prediction (Label Format)" />
+  <img src="./client/public/riskpredictionline-screen.png" width="400" alt="Risk Prediction (Line Format)" />
+  <img src="./client/public/anomolydetection-screen.png" width="400" alt="Anomaly Detection" />
+  <img src="./client/public/smartsummary-screen.png" width="400" alt="Smart Summary – Executive Report" />
+
+</div>
+
+</details>
+
+
 
 ---
 
@@ -34,8 +66,6 @@ Finance App simplifies financial oversight by merging interactive data visualiza
 - **Upload Custom Data**: Supports `.json` or `.txt` files (KPI, transaction, product).
 - **Preview & Refresh**: Instant updates reflected on all ML screens.
 - **Export to CSV**: Download cleaned structured datasets.
-
-![Features Preview](./client/public/timeseries-screen.png)
 
 ---
 
