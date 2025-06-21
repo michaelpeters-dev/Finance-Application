@@ -78,12 +78,25 @@ const LinearRegression = () => {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={formattedData}
-            margin={{ top: 20, right: 40, left: 10, bottom: 60 }}
+            margin={{ top: 20, right: 40, left: 10, bottom: 40 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
-            <XAxis dataKey="name" tickLine={false} style={{ fontSize: "12px" }}>
-              <Label value="Month" offset={-5} position="insideBottom" />
-            </XAxis>
+            <XAxis
+              dataKey="name"
+              interval={0}
+              tickLine={false}
+              style={{ fontSize: 12 }}
+              angle={-45}
+              textAnchor="end"
+              height={100}
+              label={{
+                value: "Month",
+                position: "bottom",
+                offset: -45,
+                style: { fontSize: 14 },
+              }}
+            />
+
             <YAxis
               domain={[12000, 26000]}
               axisLine={false}

@@ -139,12 +139,25 @@ const AnomalyDetectionZScore = () => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={chartData}
-            margin={{ top: 20, right: 40, left: 10, bottom: 80 }}
+            margin={{ top: 20, right: 40, left: 10, bottom: 50 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
-            <XAxis dataKey="name" tickLine={false} style={{ fontSize: 12 }}>
-              <Label value="Month" offset={0} position="insideBottom" />
-            </XAxis>
+            <XAxis
+              dataKey="name"
+              interval={0}
+              tickLine={false}
+              style={{ fontSize: 12 }}
+              angle={-45}
+              textAnchor="end"
+              height={100}
+              label={{
+                value: "Month",
+                position: "bottom",
+                offset: -55,
+                style: { fontSize: 14 },
+              }}
+            />
+
             <YAxis
               domain={["auto", "auto"]}
               axisLine={false}

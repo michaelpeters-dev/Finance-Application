@@ -192,7 +192,7 @@ const RiskPrediction = () => {
         ) : showPrediction ? (
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              margin={{ top: 20, right: 40, left: 10, bottom: 80 }}
+              margin={{ top: 20, right: 40, left: 10, bottom: 40 }}
               data={chartData}
             >
               <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
@@ -207,7 +207,7 @@ const RiskPrediction = () => {
                 label={{
                   value: "Month",
                   position: "bottom",
-                  offset: 0,
+                  offset: -45,
                   style: { fontSize: 14 },
                 }}
               />
@@ -247,7 +247,7 @@ const RiskPrediction = () => {
         ) : (
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart
-              margin={{ top: 20, right: 40, left: 10, bottom: 80 }}
+              margin={{ top: 20, right: 40, left: 10, bottom: 40 }}
               data={chartData}
             >
               <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[700]} />
@@ -262,7 +262,7 @@ const RiskPrediction = () => {
                 label={{
                   value: "Month",
                   position: "bottom",
-                  offset: 0,
+                  offset: -45,
                   style: { fontSize: 14 },
                 }}
               />

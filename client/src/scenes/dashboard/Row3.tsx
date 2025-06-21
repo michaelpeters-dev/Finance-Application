@@ -194,7 +194,13 @@ const Row3 = () => {
 
       <DashboardBox
         gridArea="i"
-        sx={{ minHeight: { xs: "260px", sm: "260px", md: "auto" } }}
+        sx={{
+          minHeight: { xs: "260px", sm: "260px", md: "auto" },
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          paddingBottom: "1.5rem",
+        }}
       >
         <BoxHeader
           title="Expense Breakdown By Category"
@@ -202,7 +208,7 @@ const Row3 = () => {
         />
         <FlexBetween
           mt="0.5rem"
-          mb="0.5rem"
+          mb="0.2rem"
           gap="2.4rem"
           p="0 -2rem"
           textAlign="center"
@@ -237,8 +243,8 @@ const Row3 = () => {
           minHeight: { xs: "220px", sm: "220px", md: "auto" },
           display: "flex",
           flexDirection: "column",
-          overflowY: "auto", // ✅ enables vertical scroll for notes only
-          maxHeight: { xs: "340px", sm: "340px", md: "360px" }, // ✅ caps height so scroll is possible
+          overflowY: "auto",
+          maxHeight: { xs: "340px", sm: "340px", md: "360px" },
         }}
       >
         <BoxHeader title="Quick Notes" sideText="" />
