@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const router = express.Router();
 
+// POST route to get a summary using GROQ API
 router.post("/summary", async (req, res) => {
   const { prompt } = req.body;
 
@@ -22,6 +23,7 @@ router.post("/summary", async (req, res) => {
   }
 
   try {
+    // Make request to GROQ API with user prompt
     const response = await axios.post(
       apiUrl,
       {
@@ -47,6 +49,7 @@ router.post("/summary", async (req, res) => {
 
     res.status(200).json({ result: content });
   } catch (error) {
+    // Handle API or network errors
     const status = error.response?.status || 500;
     const message = error.response?.data?.error?.message || error.message;
     res.status(status).json({ message });

@@ -15,7 +15,7 @@ import Product from "./models/Product.js";
 import Transaction from "./models/Transaction.js";
 import { kpis, products, transactions } from "./data/data.js";
 
-/* CONFIGURATIONS */
+/* Configurations */
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -26,14 +26,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-/* ROUTES */
+/* Routes */
 app.use("/kpi", kpiRoutes);
 app.use("/product", productRoutes);
 app.use("/transaction", transactionRoutes);
 app.use("/upload", uploadRoutes);
 app.use("/gpt", gptRoutes);
 
-/* MONGOOSE SETUP */
+/* Mongoose Setup */
 const PORT = process.env.PORT || 9000;
 mongoose
   .connect(process.env.MONGO_URL, {})
