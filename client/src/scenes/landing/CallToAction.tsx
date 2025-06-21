@@ -7,12 +7,13 @@ const CallToAction = () => {
       id="contact"
       className="relative z-[30] overflow-visible bg-black text-white pt-[120px] pb-[72px] sm:pb-24 text-center"
     >
-      {/* Blobs */}
+      {/* Decorative background blobs */}
       <div className="absolute -top-0 -left-20 w-[200px] h-[200px] sm:w-[400px] sm:h-[400px] bg-[#00f7ff] opacity-20 blur-[160px] sm:blur-[200px] rounded-full pointer-events-none z-0 mix-blend-screen animate-pulse" />
       <div className="absolute bottom-[-50px] right-[-50px] w-[200px] h-[200px] sm:w-[400px] sm:h-[400px] bg-[#7f5af0] opacity-25 blur-[140px] sm:blur-[180px] rounded-full pointer-events-none z-0 mix-blend-screen animate-pulse" />
 
-      {/* Main Content */}
+      {/* Main content */}
       <div className="container max-w-xl relative z-[2] mx-auto">
+        {/* Title and description */}
         <h2 className="font-bold text-5xl tracking-tighter sm:text-6xl">
           Get instant access
         </h2>
@@ -20,12 +21,15 @@ const CallToAction = () => {
           Celebrate the joy of accomplishment with an app designed to track your
           progress and motivate your efforts.
         </p>
+
+        {/* Email input and CTA button */}
         <form className="mt-10 flex flex-col sm:flex-row gap-2.5 w-full max-w-sm mx-auto px-4 sm:px-0">
           <input
             type="email"
             placeholder="your@email.com"
             className="h-12 w-full bg-white/20 rounded-lg px-5 font-medium placeholder:text-[#9CA3AF] text-white"
           />
+          {/* Button linking to the dashboard */}
           <Link to="/dashboard">
             <Button
               fullWidth

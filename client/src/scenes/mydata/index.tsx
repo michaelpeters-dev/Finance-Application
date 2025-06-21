@@ -10,12 +10,14 @@ import DataToolbar from "@/scenes/mydata/DataToolbar";
 import DataGridSection from "@/scenes/mydata/DataGridSection";
 import ConfirmationSnackbar from "@/components/ConfirmationSnackbar";
 
+// Define grid layout for large screens
 const gridTemplateLargeScreens = `
   "buttons buttons buttons"
   "k k k"
   "l m m"
 `;
 
+// Define grid layout for small screens
 const gridTemplateSmallScreens = `
   "buttons"
   "k"
@@ -28,17 +30,21 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   const { palette } = useTheme();
   const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
 
+  // Fetch KPI, product, and transaction data from the API
   const { data: kpiData, refetch: refetchKpis } = useGetKpisQuery();
   const { data: productData, refetch: refetchProducts } = useGetProductsQuery();
   const { data: transactionData, refetch: refetchTransactions } =
     useGetTransactionsQuery();
 
+  // States to store filtered versions of the datasets
   const [filteredKpis, setFilteredKpis] = useState<any[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [filteredTransactions, setFilteredTransactions] = useState<any[]>([]);
+
   const [isReloading, setIsReloading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  // Limit datasets to a maximum of 1000 entries
   const limitedKpis = useMemo(() => kpiData?.slice(0, 1000) || [], [kpiData]);
   const limitedProducts = useMemo(
     () => productData?.slice(0, 1000) || [],
@@ -49,6 +55,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
     [transactionData]
   );
 
+  // Use filtered data if available, else fall back to limited data
   const currentKpis = filteredKpis.length ? filteredKpis : limitedKpis;
   const currentProducts = filteredProducts.length
     ? filteredProducts
@@ -57,6 +64,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
     ? filteredTransactions
     : limitedTransactions;
 
+  // Reset all filters and refetch fresh data from the backend
   const resetFilters = async () => {
     setIsReloading(true);
     setFilteredKpis([]);
@@ -87,6 +95,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         transition: "padding-left 0.3s ease",
       }}
     >
+      {/* Grid layout with responsive template based on screen size */}
       <Box
         display="grid"
         width="100%"
@@ -105,6 +114,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
               }
         }
       >
+        {/* Toolbar with data refresh and export controls */}
         <DashboardBox gridArea="buttons">
           <DataToolbar
             isReloading={isReloading}
@@ -115,6 +125,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
           />
         </DashboardBox>
 
+        {/* KPI data grid */}
         <DashboardBox
           gridArea="k"
           sx={{ height: "145px", display: "flex", flexDirection: "column" }}
@@ -132,6 +143,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
           />
         </DashboardBox>
 
+        {/* Product data grid */}
         <DashboardBox
           gridArea="l"
           sx={{ height: "550px", display: "flex", flexDirection: "column" }}
@@ -158,6 +170,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
           />
         </DashboardBox>
 
+        {/* Transaction data grid */}
         <DashboardBox
           gridArea="m"
           sx={{ height: "550px", display: "flex", flexDirection: "column" }}
@@ -186,6 +199,7 @@ const MyData = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         </DashboardBox>
       </Box>
 
+      {/* Snackbar to confirm data refresh */}
       <ConfirmationSnackbar
         open={openSnackbar}
         onClose={() => setOpenSnackbar(false)}

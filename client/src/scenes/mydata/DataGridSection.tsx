@@ -17,6 +17,7 @@ const DataGridSection = ({
 }: DataGridSectionProps) => {
   const { palette } = useTheme();
 
+  // Custom styling for the MUI DataGrid component
   const gridSx = {
     "& .MuiDataGrid-root": {
       color: palette.grey[300],
@@ -39,7 +40,10 @@ const DataGridSection = ({
 
   return (
     <>
+      {/* Section header with title and side text */}
       <BoxHeader title={title} sideText={sideText} />
+
+      {/* Scrollable container for the DataGrid */}
       <Box
         mt="0.5rem"
         p="0 0.5rem"

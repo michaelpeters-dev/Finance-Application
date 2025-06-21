@@ -10,9 +10,10 @@ interface DataToolbarProps {
   currentTransactions: any[];
 }
 
+// Converts an array of objects to a CSV format and triggers file download
 const exportToCSV = (data: any[], filename: string) => {
   const csv = [
-    Object.keys(data[0]).join(","),
+    Object.keys(data[0]).join(","), // CSV header
     ...data.map((row) =>
       Object.values(row)
         .map((val) => `"${val}"`)
@@ -42,6 +43,7 @@ const DataToolbar = ({
         transition: "padding-left 0.3s ease",
       }}
     >
+      {/* Header with title and description */}
       <FlexBetween gap="1rem" flexWrap="wrap">
         <Box>
           <Typography variant="h3" gutterBottom>
@@ -53,6 +55,7 @@ const DataToolbar = ({
           </Typography>
         </Box>
 
+        {/* Buttons for refreshing and exporting data */}
         <Box display="flex" gap="1rem" flexWrap="wrap">
           <Button
             onClick={onRefresh}

@@ -16,6 +16,7 @@ import {
 } from "recharts";
 import regression, { DataPoint } from "regression";
 
+// Mapping full month names to short-form labels for X-axis
 const MONTH_SHORT_MAP: { [key: string]: string } = {
   January: "Jan",
   February: "Feb",
@@ -33,10 +34,11 @@ const MONTH_SHORT_MAP: { [key: string]: string } = {
 
 const PolynomialRegression = () => {
   const { palette } = useTheme();
-  const [showPrediction, setShowPrediction] = useState(false);
-  const [degree, setDegree] = useState(2);
-  const { data: kpiData } = useGetKpisQuery();
+  const [showPrediction, setShowPrediction] = useState(false); // Toggle for forecast view
+  const [degree, setDegree] = useState(2); // Degree of polynomial regression
+  const { data: kpiData } = useGetKpisQuery(); // Fetch KPI data
 
+  // Format data for the chart and compute regression
   const formattedData = useMemo(() => {
     if (!kpiData) return [];
 
@@ -59,6 +61,7 @@ const PolynomialRegression = () => {
 
     const chartData: ChartData[] = [];
 
+    // Populate chart with actual and regression values
     for (let i = 0; i < currentLength; i++) {
       chartData.push({
         name: MONTH_SHORT_MAP[monthData[i].month] || monthData[i].month,
@@ -67,6 +70,7 @@ const PolynomialRegression = () => {
       });
     }
 
+    // Extend chart with forecasted values if enabled
     if (showPrediction) {
       const startIdx = currentLength - 1;
       const predictedStart = regressionLine.predict(startIdx)[1];
@@ -112,6 +116,7 @@ const PolynomialRegression = () => {
         bgcolor={palette.grey[800]}
         boxShadow="0 0 8px rgba(0, 0, 0, 0.15)"
       >
+        {/* Header and control panel */}
         <FlexBetween mb="1.5rem" gap="1rem" flexWrap="wrap">
           <Box>
             <Typography variant="h3" gutterBottom>
@@ -123,6 +128,7 @@ const PolynomialRegression = () => {
           </Box>
 
           <FlexBetween gap="1rem">
+            {/* Degree selector slider */}
             <Box width={150}>
               <Typography
                 variant="body2"
@@ -155,6 +161,7 @@ const PolynomialRegression = () => {
               />
             </Box>
 
+            {/* Prediction toggle */}
             <Button
               onClick={() => setShowPrediction(!showPrediction)}
               sx={{
@@ -168,12 +175,14 @@ const PolynomialRegression = () => {
           </FlexBetween>
         </FlexBetween>
 
+        {/* Chart rendering */}
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={formattedData}
             margin={{ top: 20, right: 40, left: 10, bottom: 40 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
+
             <XAxis
               dataKey="name"
               interval={0}
@@ -205,9 +214,11 @@ const PolynomialRegression = () => {
                 position="insideLeft"
               />
             </YAxis>
+
             <Tooltip />
             <Legend verticalAlign="top" height={36} />
 
+            {/* Dots for actual revenue */}
             <Line
               type="monotone"
               dataKey="Actual Revenue"
@@ -216,6 +227,7 @@ const PolynomialRegression = () => {
               dot={{ strokeWidth: 5 }}
             />
 
+            {/* Continuous regression line */}
             <Line
               type="monotone"
               dataKey="Regression Line"
@@ -224,6 +236,7 @@ const PolynomialRegression = () => {
               dot={false}
             />
 
+            {/* Forecasted future revenue */}
             {showPrediction && (
               <Line
                 type="monotone"

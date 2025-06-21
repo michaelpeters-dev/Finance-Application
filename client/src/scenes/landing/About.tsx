@@ -22,9 +22,12 @@ const About = () => {
   return (
     <div id="about" className="bg-black text-white py-[72px]">
       <div className="max-w-screen-xl mx-auto px-4">
+        {/* Main headline */}
         <h2 className="text-center font-bold text-5xl sm:text-6xl tracking-tighter">
           Everything you need
         </h2>
+
+        {/* Subtitle paragraph */}
         <div className="max-w-xl mx-auto">
           <p className="text-center mt-5 text-xl text-white/70">
             Enjoy customizable lists, team work tools, and smart tracking all in
@@ -32,16 +35,20 @@ const About = () => {
             and quickly.
           </p>
         </div>
+
+        {/* Features list – flex column on mobile, row on small+ screens */}
         <div className="mt-16 flex flex-col sm:flex-row gap-4">
           {features.map(({ title, description }) => (
             <div
               key={title}
               className="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1"
             >
+              {/* Feature icon */}
               <div className="inline-flex h-14 w-14 bg-white text-black justify-center items-center rounded-lg">
                 <CircleCheck className="h-6 w-6" />
               </div>
 
+              {/* Feature title and description */}
               <h3 className="mt-6 font-bold">{title}</h3>
               <p className="mt-2 text-white/70">{description}</p>
             </div>

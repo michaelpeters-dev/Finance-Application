@@ -18,19 +18,25 @@ import regression, { DataPoint } from "regression";
 
 const LinearRegression = () => {
   const { palette } = useTheme();
+
   const [showPrediction, setShowPrediction] = useState(false);
+
   const { data: kpiData } = useGetKpisQuery();
 
+  // Format and prepare data for chart rendering and regression calculation
   const formattedData = useMemo(() => {
     if (!kpiData) return [];
     const monthData = kpiData[0].monthlyData;
 
+    // Create an array of [index, revenue] points for regression
     const formatted: Array<DataPoint> = monthData.map(
       ({ revenue }: { revenue: number }, i: number) => [i, revenue]
     );
 
+    // Perform linear regression on the formatted data
     const regressionLine = regression.linear(formatted);
 
+    // Return final chart data with actual, regression, and future prediction
     return monthData.map(
       ({ month, revenue }: { month: string; revenue: number }, i: number) => ({
         name: month,
@@ -43,6 +49,7 @@ const LinearRegression = () => {
 
   return (
     <Box px={2} py={2}>
+      {/* Chart container with custom styling */}
       <DashboardBox
         width="100%"
         height="calc(100vh - 100px)"
@@ -51,6 +58,7 @@ const LinearRegression = () => {
         bgcolor={palette.grey[800]}
         boxShadow="0 0 8px rgba(0, 0, 0, 0.15)"
       >
+        {/* Header and toggle button */}
         <FlexBetween mb="1.5rem" gap="1rem" flexWrap="wrap">
           <Box>
             <Typography variant="h3" gutterBottom>
@@ -75,12 +83,15 @@ const LinearRegression = () => {
           </Button>
         </FlexBetween>
 
+        {/* Line chart with axes, tooltips, and regression data */}
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={formattedData}
             margin={{ top: 20, right: 40, left: 10, bottom: 40 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
+
+            {/* X-axis configuration */}
             <XAxis
               dataKey="name"
               interval={0}
@@ -97,6 +108,7 @@ const LinearRegression = () => {
               }}
             />
 
+            {/* Y-axis configuration */}
             <YAxis
               domain={[12000, 26000]}
               axisLine={false}
@@ -111,8 +123,12 @@ const LinearRegression = () => {
                 position="insideLeft"
               />
             </YAxis>
+
+            {/* Tooltip and legend */}
             <Tooltip />
             <Legend verticalAlign="top" height={36} />
+
+            {/* Actual revenue data points */}
             <Line
               type="monotone"
               dataKey="Actual Revenue"
@@ -120,6 +136,8 @@ const LinearRegression = () => {
               strokeWidth={0}
               dot={{ strokeWidth: 5 }}
             />
+
+            {/* Regression line */}
             <Line
               type="monotone"
               dataKey="Regression Line"
@@ -127,6 +145,8 @@ const LinearRegression = () => {
               strokeWidth={2}
               dot={false}
             />
+
+            {/* Optional predicted revenue line */}
             {showPrediction && (
               <Line
                 type="monotone"

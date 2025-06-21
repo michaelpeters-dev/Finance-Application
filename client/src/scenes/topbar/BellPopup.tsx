@@ -16,10 +16,12 @@ const BellPopup = () => {
         boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
       }}
     >
+      {/* Popup Title */}
       <Typography variant="subtitle1" fontWeight={600} mb={1}>
         Notifications
       </Typography>
 
+      {/* Divider */}
       <Divider
         sx={{
           borderColor: "rgba(255,255,255,0.1)",
@@ -27,6 +29,7 @@ const BellPopup = () => {
         }}
       />
 
+      {/* Notification Item */}
       <Box
         sx={{
           px: 1,
@@ -43,7 +46,6 @@ const BellPopup = () => {
         <Typography variant="body2" color="white">
           Welcome to Finance Application!
         </Typography>
-
         <Typography variant="caption" color="gray">
           Just now
         </Typography>

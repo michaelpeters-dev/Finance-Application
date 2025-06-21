@@ -38,6 +38,7 @@ const FAQ = () => {
           FAQ and Feature Guide
         </Typography>
 
+        {/* Dashboard Overview Section */}
         <Typography variant="h5" mt={4} gutterBottom>
           🛠 Dashboard Overview
         </Typography>
@@ -50,6 +51,7 @@ const FAQ = () => {
           <Bullet text='"Revenue Month by Month": Bar chart of total revenue per month.' />
         </ul>
 
+        {/* Raw data section */}
         <Typography variant="h5" mt={4} gutterBottom>
           🛠 My Data
         </Typography>
@@ -57,13 +59,15 @@ const FAQ = () => {
           <Bullet text="Represents the sample data used in this application in its rawest format." />
         </ul>
 
+        {/* Upload Data - Placeholder */}
         <Typography variant="h5" mt={4} gutterBottom>
           🛠 Upload New Data
         </Typography>
         <ul>
-          <Bullet text="Apologies for the inconvinience, this feature has been disabled as this application is still in production." />
+          <Bullet text="Apologies for the inconvenience, this feature has been disabled as this application is still in production." />
         </ul>
 
+        {/* Machine Learning explanations */}
         <Typography variant="h5" mt={4} gutterBottom>
           🛠 Machine Learning Predictions
         </Typography>
@@ -76,6 +80,7 @@ const FAQ = () => {
           <Bullet text="Smart Summary: Generates AI-based executive-level insights for CROs and finance stakeholders. Certain metrics are calculated and included in the summary." />
         </ul>
 
+        {/* Definitions and help interpreting visualizations */}
         <Typography variant="h5" mt={4} gutterBottom>
           🛠 Interpreting Key Metrics
         </Typography>
@@ -87,6 +92,7 @@ const FAQ = () => {
           <Bullet text="Risk Probability: Value near 1 indicates high risk." />
         </ul>
 
+        {/* Support & bug resolution */}
         <Typography variant="h5" mt={4} gutterBottom>
           🛠 Troubleshooting
         </Typography>

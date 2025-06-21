@@ -21,7 +21,7 @@ const AnomalyDetectionZScore = () => {
   const { palette } = useTheme();
   const { data: kpiData } = useGetKpisQuery();
 
-  // Calculate mean and std once
+  // Extract revenue, mean, and standard deviation to prepare for Z-score calculation
   const { mean, std, revenues } = useMemo(() => {
     if (!kpiData) return { mean: 0, std: 0, revenues: [] };
     const revenues = kpiData[0].monthlyData.map(({ revenue }) => revenue);
@@ -33,21 +33,22 @@ const AnomalyDetectionZScore = () => {
     return { mean, std, revenues };
   }, [kpiData]);
 
-  // Function to calculate anomaly count for given threshold
+  // Count how many months exceed a given Z-score threshold
   const getAnomalyCount = (threshold: number) => {
     if (std === 0) return 0;
     return revenues.filter((r) => Math.abs((r - mean) / std) > threshold)
       .length;
   };
 
-  // Find recommended threshold on mount or data change
   const [threshold, setThreshold] = useState(2);
   const [recommendedThreshold, setRecommendedThreshold] = useState(2);
 
   useEffect(() => {
     if (!revenues.length) return;
     const maxAnomalies = Math.floor(revenues.length * 0.2);
-    let foundThreshold = 2; // default
+
+    // Find the lowest threshold where anomalies are <= 20% of data
+    let foundThreshold = 2;
     for (let t = 1; t <= 4; t += 0.1) {
       const count = getAnomalyCount(t);
       if (count <= maxAnomalies) {
@@ -55,10 +56,12 @@ const AnomalyDetectionZScore = () => {
         break;
       }
     }
+
     setRecommendedThreshold(foundThreshold);
     setThreshold(foundThreshold);
   }, [mean, std, revenues]);
 
+  // Prepare chart data with Z-score and anomaly flag for each month
   const chartData = useMemo(() => {
     if (!kpiData) return [];
 
@@ -67,14 +70,14 @@ const AnomalyDetectionZScore = () => {
       const isAnomaly = Math.abs(zScore) > threshold;
       return {
         name: month,
-        Revenue: revenue, // Capital R here
+        Revenue: revenue, // Capital R to match chart key
         zScore,
         isAnomaly,
       };
     });
   }, [kpiData, threshold, mean, std]);
 
-  // Upper and lower threshold revenue values for reference lines
+  // Calculate revenue range for drawing threshold lines
   const upperThresholdValue = mean + threshold * std;
   const lowerThresholdValue = mean - threshold * std;
 
@@ -112,6 +115,8 @@ const AnomalyDetectionZScore = () => {
             >
               Anomaly Threshold: {threshold.toFixed(1)}
             </Typography>
+
+            {/* Threshold slider to control Z-score limit */}
             <Slider
               value={threshold}
               min={1}
@@ -172,6 +177,8 @@ const AnomalyDetectionZScore = () => {
                 position="insideLeft"
               />
             </YAxis>
+
+            {/* Custom tooltip with revenue, z-score, and anomaly status */}
             <Tooltip
               formatter={(value: number) => `$${value.toLocaleString()}`}
               labelFormatter={(label) => `Month: ${label}`}
@@ -189,8 +196,7 @@ const AnomalyDetectionZScore = () => {
                       }}
                     >
                       <div>{`Month: ${label}`}</div>
-                      <div>{`Revenue: $${data.Revenue.toLocaleString()}`}</div>{" "}
-                      {/* Capital R */}
+                      <div>{`Revenue: $${data.Revenue.toLocaleString()}`}</div>
                       <div>{`Z-Score: ${data.zScore.toFixed(2)}`}</div>
                       <div
                         style={{
@@ -206,6 +212,7 @@ const AnomalyDetectionZScore = () => {
                 return null;
               }}
             />
+
             <Legend
               verticalAlign="top"
               align="center"
@@ -214,6 +221,7 @@ const AnomalyDetectionZScore = () => {
               wrapperStyle={{ paddingBottom: "1rem" }}
             />
 
+            {/* Visual reference lines for anomaly range */}
             <ReferenceLine
               y={upperThresholdValue}
               stroke="orange"
@@ -239,6 +247,7 @@ const AnomalyDetectionZScore = () => {
               }}
             />
 
+            {/* Bars colored based on anomaly detection */}
             <Bar
               dataKey="Revenue"
               stroke={palette.primary.main}

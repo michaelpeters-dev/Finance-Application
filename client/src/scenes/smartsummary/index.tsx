@@ -18,6 +18,7 @@ const SmartSummary = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
+  // Format KPI data and send it to the backend for summary generation
   const fetchInsight = async () => {
     if (!kpiData) return;
     setLoading(true);
@@ -31,6 +32,7 @@ const SmartSummary = () => {
       })
     );
 
+    // Highly detailed and formatted prompt for the backend GPT model
     const prompt = `
 You are an actuarial capital risk strategist at a global financial institution. You’ve received structured monthly financial KPI data spanning a 12-month fiscal period, including revenue, expenses, and profit. Your mandate is to synthesize this time series into a precision-calibrated internal report suitable for presentation to CROs, ICAAP committees, and senior solvency and capital governance stakeholders.
 
@@ -76,6 +78,7 @@ This is not a descriptive summary — it is a professional internal risk briefin
     }
   };
 
+  // Copy the generated insight to clipboard
   const copyToClipboard = () => {
     if (!insight) return;
     navigator.clipboard.writeText(insight).then(() => {
@@ -84,6 +87,7 @@ This is not a descriptive summary — it is a professional internal risk briefin
     });
   };
 
+  // Auto-fetch insights when KPI data is available
   useEffect(() => {
     if (kpiData) fetchInsight();
   }, [kpiData]);
@@ -99,6 +103,7 @@ This is not a descriptive summary — it is a professional internal risk briefin
         boxShadow="0 0 8px rgba(0, 0, 0, 0.15)"
         sx={{ overflowY: "auto" }}
       >
+        {/* Header Section */}
         <FlexBetween mb="1.5rem" gap="1rem" flexWrap="wrap">
           <Box>
             <Typography variant="h3" gutterBottom>
@@ -109,6 +114,7 @@ This is not a descriptive summary — it is a professional internal risk briefin
             </Typography>
           </Box>
 
+          {/* Buttons: Regenerate and Copy */}
           <Box display="flex" gap="0.75rem" flexWrap="wrap">
             <Button
               onClick={fetchInsight}
@@ -139,6 +145,7 @@ This is not a descriptive summary — it is a professional internal risk briefin
           </Box>
         </FlexBetween>
 
+        {/* Summary Output or Loading Indicator */}
         {loading ? (
           <Box
             display="flex"

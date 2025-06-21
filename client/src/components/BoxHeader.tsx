@@ -10,6 +10,7 @@ type Props = {
 
 const BoxHeader = ({ icon, title, subtitle, sideText }: Props) => {
   const { palette } = useTheme();
+
   return (
     <FlexBetween color={palette.grey[400]} margin="1.5rem 1rem 0 1rem">
       <FlexBetween>

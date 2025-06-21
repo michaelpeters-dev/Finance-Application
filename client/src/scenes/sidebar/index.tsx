@@ -85,7 +85,7 @@ const Sidebar = ({
         isOpen ? "w-64" : "w-16"
       } bg-[#2d2d34]`}
     >
-      {/* Top section */}
+      {/* Top bar with logo and toggle button */}
       <div
         className={`relative flex items-center h-16 px-4 border-b border-white/10 ${
           isOpen ? "justify-between" : "justify-center"
@@ -98,7 +98,6 @@ const Sidebar = ({
               alt="Logo"
               className="w-10 drop-shadow-[0_0_4px_rgba(255,255,255,0.7)]"
             />
-
             <span className="text-lg font-semibold whitespace-nowrap translate-y-[1px]">
               Finance App
             </span>
@@ -112,7 +111,7 @@ const Sidebar = ({
         </button>
       </div>
 
-      {/* Profile */}
+      {/* User profile info (when expanded only) */}
       {isOpen && (
         <div className="text-center py-5 border-b border-white/10">
           <img
@@ -121,7 +120,6 @@ const Sidebar = ({
             className="mx-auto w-20 h-20 rounded-full mb-2 shadow-[0_0_6px_rgba(255,255,255,0.3)] bg-white object-cover"
             style={{ border: `2px solid ${palette.primary[400]}` }}
           />
-
           <h2 className="text-lg font-semibold">Guest</h2>
           <p className="text-sm" style={{ color: palette.primary[400] }}>
             Tester
@@ -129,13 +127,13 @@ const Sidebar = ({
         </div>
       )}
 
-      {/* Navigation */}
+      {/* Navigation links */}
       <div
         className={`flex-1 overflow-y-auto flex flex-col ${
           isOpen ? "px-4 pt-4" : "pt-4 items-center"
         }`}
       >
-        {/* Dashboard */}
+        {/* Dashboard link */}
         <Link
           to="/dashboard"
           className={`flex items-center px-3 py-2 mb-2 rounded-md transition ${
@@ -148,7 +146,7 @@ const Sidebar = ({
           {isOpen && <span className="text-sm font-medium">Dashboard</span>}
         </Link>
 
-        {/* Nav sections */}
+        {/* Dynamically render each navigation section */}
         {navSections.map(({ title, items }) => (
           <div key={title} className={`w-full ${isOpen ? "mt-6" : "mt-2"}`}>
             {isOpen && (

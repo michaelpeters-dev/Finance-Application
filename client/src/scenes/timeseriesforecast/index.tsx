@@ -17,6 +17,7 @@ import {
 // @ts-ignore
 import ARIMA from "arima";
 
+// Month name mapping for label formatting
 const MONTH_SHORT = {
   January: "Jan",
   February: "Feb",
@@ -32,6 +33,7 @@ const MONTH_SHORT = {
   December: "Dec",
 };
 
+// Linear fallback forecast in case ARIMA fails
 const linearForecast = (values: number[], months: number) => {
   const points = values.map((v, i) => [i, v]);
   // @ts-ignore
@@ -48,6 +50,7 @@ const TimeSeriesForecast = () => {
   const { data } = useGetKpisQuery();
   const [showForecast, setShowForecast] = useState(false);
 
+  // Generate chart data with or without forecast
   const chartData = useMemo(() => {
     if (!data) return [];
 
@@ -57,6 +60,7 @@ const TimeSeriesForecast = () => {
     const scaled = actuals.map((v) => v / scale);
 
     let forecast: number[] = [];
+
     if (showForecast) {
       try {
         const arima = new ARIMA({
@@ -71,15 +75,22 @@ const TimeSeriesForecast = () => {
         }).train(scaled);
         const raw = arima.predict(12)[0];
         const offset = 30886.92;
+
+        // Apply reverse scale and offset
         // @ts-ignore
         forecast = raw.map((v) => v * scale - offset);
+
+        // Fallback to linear if ARIMA output is too flat
         const range = Math.max(...forecast) - Math.min(...forecast);
-        if (range < scale * 0.01) forecast = linearForecast(actuals, 12);
+        if (range < scale * 0.01) {
+          forecast = linearForecast(actuals, 12);
+        }
       } catch {
         forecast = linearForecast(actuals, 12);
       }
     }
 
+    // Construct combined actual + forecast dataset
     let year = new Date().getFullYear();
     const months = Object.values(MONTH_SHORT);
     const lastMonthIndex = months.indexOf(
@@ -101,6 +112,7 @@ const TimeSeriesForecast = () => {
       };
     });
 
+    // Extend dataset with forecast points
     if (showForecast) {
       let forecastYear = year;
       for (let i = 0; i < forecast.length; i++) {
@@ -127,6 +139,7 @@ const TimeSeriesForecast = () => {
         bgcolor={palette.grey[800]}
         boxShadow="0 0 8px rgba(0, 0, 0, 0.15)"
       >
+        {/* Header and Toggle Button */}
         <FlexBetween mb="1.5rem" gap="1rem" flexWrap="wrap">
           <Box>
             <Typography variant="h3" gutterBottom>
@@ -148,6 +161,7 @@ const TimeSeriesForecast = () => {
           </Button>
         </FlexBetween>
 
+        {/* Forecast Chart */}
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
@@ -170,7 +184,6 @@ const TimeSeriesForecast = () => {
                 style: { fontSize: 14 },
               }}
             />
-
             <YAxis
               domain={[0, "dataMax"]}
               tickCount={6}
@@ -188,7 +201,6 @@ const TimeSeriesForecast = () => {
             </YAxis>
             <Tooltip formatter={(value: any) => `$${value.toLocaleString()}`} />
             <Legend verticalAlign="top" height={36} />
-
             <Line
               key="actual"
               type="monotone"

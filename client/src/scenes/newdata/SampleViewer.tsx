@@ -1,6 +1,7 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { Download } from "@mui/icons-material";
 
+// Sample JSON object representing valid upload structure
 const sampleData = {
   kpis: [
     {
@@ -27,6 +28,7 @@ const sampleData = {
 const SampleViewer = () => {
   const { palette } = useTheme();
 
+  // Trigger JSON download of the sample data
   const handleDownload = () => {
     const blob = new Blob([JSON.stringify(sampleData, null, 2)], {
       type: "application/json",
@@ -44,7 +46,7 @@ const SampleViewer = () => {
 
   return (
     <>
-      {/* HEADER */}
+      {/* Header Section */}
       <Box sx={{ padding: "1rem" }}>
         <Typography variant="h3" gutterBottom>
           Sample Upload Format
@@ -54,7 +56,7 @@ const SampleViewer = () => {
         </Typography>
       </Box>
 
-      {/* JSON VIEWER */}
+      {/* Code Viewer Block */}
       <Box
         sx={{
           fontFamily: "monospace",
@@ -73,7 +75,7 @@ const SampleViewer = () => {
         {JSON.stringify(sampleData, null, 2)}
       </Box>
 
-      {/* DOWNLOAD BUTTON */}
+      {/* Download Button */}
       <Box textAlign="right" px={2} pb={2}>
         <Button
           onClick={handleDownload}

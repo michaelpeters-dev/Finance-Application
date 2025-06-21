@@ -22,6 +22,7 @@ const Row1 = () => {
   const { palette } = useTheme();
   const { data } = useGetKpisQuery();
 
+  // Format monthly revenue data for bar chart
   const revenue = useMemo(() => {
     return (
       data &&
@@ -36,6 +37,7 @@ const Row1 = () => {
     );
   }, [data]);
 
+  // Format revenue vs. expenses data for area chart
   const revenueExpenses = useMemo(() => {
     return (
       data &&
@@ -59,6 +61,7 @@ const Row1 = () => {
     );
   }, [data]);
 
+  // Calculate monthly profit values (revenue - expenses) for line chart
   const revenueProfit = useMemo(() => {
     return (
       data &&
@@ -82,6 +85,7 @@ const Row1 = () => {
     );
   }, [data]);
 
+  // Compute revenue growth between the last two months
   const revenueGrowth = useMemo(() => {
     if (!data || data[0].monthlyData.length < 2) return null;
     const monthlyData = data[0].monthlyData;
@@ -91,6 +95,7 @@ const Row1 = () => {
     return growth >= 0 ? `+${growth.toFixed(1)}%` : `${growth.toFixed(1)}%`;
   }, [data]);
 
+  // Calculate latest month's profit margin as percentage
   const latestProfitMargin = useMemo(() => {
     if (!data) return null;
     const lastMonth = data[0].monthlyData.at(-1);
@@ -105,6 +110,7 @@ const Row1 = () => {
     return formatted;
   }, [data]);
 
+  // Year-to-date revenue growth: January vs. December
   const ytdRevenueGrowth = useMemo(() => {
     if (!data || data[0].monthlyData.length < 12) return null;
 
@@ -117,6 +123,7 @@ const Row1 = () => {
 
   return (
     <>
+      {/* Area chart: Revenue vs. Expenses */}
       <DashboardBox
         gridArea="a"
         sx={{
@@ -147,6 +154,7 @@ const Row1 = () => {
               bottom: 60,
             }}
           >
+            {/* Gradient fills for revenue and expenses */}
             <defs>
               <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                 <stop
@@ -205,6 +213,7 @@ const Row1 = () => {
         </ResponsiveContainer>
       </DashboardBox>
 
+      {/* Line chart: Profit and Revenue comparison */}
       <DashboardBox
         gridArea="b"
         sx={{
@@ -274,6 +283,7 @@ const Row1 = () => {
         </ResponsiveContainer>
       </DashboardBox>
 
+      {/* Bar chart: Revenue per month */}
       <DashboardBox
         gridArea="c"
         sx={{ minHeight: { xs: "380px", sm: "380px", md: "auto" } }}

@@ -24,7 +24,7 @@ const UserPopup = () => {
       <Divider sx={{ borderColor: "rgba(255,255,255,0.1)", mb: 1 }} />
 
       <Box display="flex" alignItems="center" gap={1.5} mb={1.5}>
-        <Avatar alt="Guest" src={profile} sx={{ width: 40, height: 40 }} />
+        <Avatar src={profile} alt="Guest" sx={{ width: 40, height: 40 }} />
         <Box>
           <Typography variant="body1" fontWeight={500}>
             Guest
@@ -41,8 +41,8 @@ const UserPopup = () => {
           py: 0.75,
           bgcolor: "#2d2d34",
           borderRadius: 1,
-          color: "gray",
           fontSize: "0.8rem",
+          color: "gray",
         }}
       >
         You are currently signed in as a Guest User.

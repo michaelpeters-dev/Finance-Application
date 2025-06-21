@@ -17,7 +17,7 @@ const UploadToolbar = ({ onSelectFile, onUploadClick }: UploadToolbarProps) => {
       justifyContent="space-between"
       width="100%"
     >
-      {/* HEADER */}
+      {/* Section: Header */}
       <Box sx={{ padding: "1rem" }}>
         <Typography variant="h3" gutterBottom>
           Upload Data
@@ -28,8 +28,9 @@ const UploadToolbar = ({ onSelectFile, onUploadClick }: UploadToolbarProps) => {
         </Typography>
       </Box>
 
-      {/* FILE BUTTONS */}
+      {/* Section: Upload Actions */}
       <Box display="flex" gap="1rem" alignItems="center">
+        {/* Disabled File Selector */}
         <Button
           component="label"
           disabled
@@ -55,6 +56,7 @@ const UploadToolbar = ({ onSelectFile, onUploadClick }: UploadToolbarProps) => {
           />
         </Button>
 
+        {/* Locked Upload Button */}
         <Button
           onClick={onUploadClick}
           startIcon={<Lock />}

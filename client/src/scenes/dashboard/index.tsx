@@ -7,6 +7,7 @@ interface DashboardProps {
   isSidebarOpen: boolean;
 }
 
+// Grid layout for large screens
 const gridTemplateLargeScreens = `
   "a b c"
   "a b c"
@@ -20,6 +21,7 @@ const gridTemplateLargeScreens = `
   "g h j"
 `;
 
+// Stacked grid layout for small screens
 const gridTemplateSmallScreens = `
   "a"
   "a"
@@ -55,20 +57,19 @@ const gridTemplateSmallScreens = `
 
 const Dashboard = ({ isSidebarOpen }: DashboardProps) => {
   const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
-  const { palette } = useTheme();
 
   return (
     <Box
       sx={{
         width: "100%",
         maxWidth: "100vw",
-        minHeight: "100vh", // Ensures page fills height
+        minHeight: "100vh", // Ensures full vertical coverage
         padding: "2rem 1rem 4rem 1rem",
-        paddingLeft: isSidebarOpen ? "20px" : "20px",
+        paddingLeft: isSidebarOpen ? "20px" : "20px", // Can be adjusted for sidebar width
         paddingRight: isSidebarOpen ? "20px" : "20px",
-        transition: "padding-left 0.3s ease",
-        overflowX: "hidden", // horizontal scroll prevented
-        overflowY: "visible", // no vertical restriction
+        transition: "padding-left 0.3s ease", // Smooth sidebar toggle
+        overflowX: "hidden", // Prevent horizontal scroll
+        overflowY: "visible", // Allow vertical content to expand
       }}
     >
       <Box
@@ -76,12 +77,14 @@ const Dashboard = ({ isSidebarOpen }: DashboardProps) => {
         sx={
           isAboveMediumScreens
             ? {
+                // Responsive grid for large screens (3-column layout)
                 gridTemplateColumns: "repeat(3, minmax(300px, 1fr))",
                 gridTemplateRows: "repeat(10, 60px)",
                 gridTemplateAreas: gridTemplateLargeScreens,
                 gap: "1.5rem",
               }
             : {
+                // Stacked layout for smaller screens
                 gridAutoColumns: "1fr",
                 gridAutoRows: "70px",
                 gridTemplateAreas: gridTemplateSmallScreens,

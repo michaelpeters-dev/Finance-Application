@@ -27,11 +27,12 @@ const RiskPrediction = () => {
   const { palette } = useTheme();
   const { data: kpiData } = useGetKpisQuery();
 
-  const [showPrediction, setShowPrediction] = useState(true);
-  const [model, setModel] = useState<tf.LayersModel | null>(null);
-  const [predictions, setPredictions] = useState<number[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [showPrediction, setShowPrediction] = useState(true); // Toggle between predicted and actual views
+  const [model, setModel] = useState<tf.LayersModel | null>(null); // TensorFlow model state
+  const [predictions, setPredictions] = useState<number[]>([]); // Output predictions from model
+  const [loading, setLoading] = useState(true); // Controls loading state
 
+  // Format KPI data: normalize values and assign binary labels for risk
   const data = useMemo(() => {
     if (!kpiData) return [];
 
@@ -58,18 +59,20 @@ const RiskPrediction = () => {
           name: month,
           revenue: rev,
           expenses: exp,
-          riskLabel: exp / rev > 0.8 ? 1 : 0,
+          riskLabel: exp / rev > 0.8 ? 1 : 0, // Binary label for risk
         };
       }
     );
   }, [kpiData]);
 
+  // Train logistic regression model on revenue and expenses
   useEffect(() => {
     if (!data.length) return;
 
     const train = async () => {
       setLoading(true);
 
+      // Normalize feature values
       const revenues = data.map((d) => d.revenue);
       const expenses = data.map((d) => d.expenses);
 
@@ -91,6 +94,7 @@ const RiskPrediction = () => {
         [data.length, 1]
       );
 
+      // Define and compile logistic regression model
       const model = tf.sequential();
       model.add(
         tf.layers.dense({ units: 1, activation: "sigmoid", inputShape: [2] })
@@ -110,6 +114,7 @@ const RiskPrediction = () => {
     train();
   }, [data]);
 
+  // Run predictions once model is trained
   useEffect(() => {
     if (!model || !data.length) return;
 
@@ -143,6 +148,7 @@ const RiskPrediction = () => {
     predict();
   }, [model, data]);
 
+  // Merge predictions with original data for visualization
   const chartData = useMemo(() => {
     if (predictions.length !== data.length) return data;
     return data.map((d, i) => ({ ...d, riskScore: predictions[i] ?? 0 }));
@@ -158,6 +164,7 @@ const RiskPrediction = () => {
         bgcolor={palette.grey[800]}
         boxShadow="0 0 8px rgba(0,0,0,0.15)"
       >
+        {/* Header and toggle button */}
         <FlexBetween mb="1.5rem" gap="1rem" flexWrap="wrap">
           <Box>
             <Typography variant="h3" gutterBottom>
@@ -180,6 +187,7 @@ const RiskPrediction = () => {
           </Button>
         </FlexBetween>
 
+        {/* Loading state */}
         {loading ? (
           <Box
             height="calc(100vh - 200px)"
@@ -190,6 +198,7 @@ const RiskPrediction = () => {
             <CircularProgress color="secondary" />
           </Box>
         ) : showPrediction ? (
+          // Line chart for predicted probabilities
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               margin={{ top: 20, right: 40, left: 10, bottom: 40 }}
@@ -245,6 +254,7 @@ const RiskPrediction = () => {
             </LineChart>
           </ResponsiveContainer>
         ) : (
+          // Scatter chart for actual binary labels
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart
               margin={{ top: 20, right: 40, left: 10, bottom: 40 }}

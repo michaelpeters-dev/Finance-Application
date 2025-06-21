@@ -1,9 +1,9 @@
 import { Box, Snackbar, useTheme } from "@mui/material";
 
 interface ConfirmationSnackbarProps {
-  open: boolean;
-  onClose: () => void;
-  message: string;
+  open: boolean; // Controls visibility of the Snackbar
+  onClose: () => void; // Callback when the Snackbar closes
+  message: string; // Message content to display
 }
 
 const ConfirmationSnackbar = ({
@@ -20,6 +20,7 @@ const ConfirmationSnackbar = ({
       onClose={onClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
     >
+      {/* Inner message box with custom styling */}
       <Box
         sx={{
           backgroundColor: palette.primary[500],

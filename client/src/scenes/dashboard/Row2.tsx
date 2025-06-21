@@ -25,9 +25,11 @@ const Row2 = () => {
   const { palette } = useTheme();
   const pieColors = [palette.primary[500], palette.tertiary[500]];
 
+  // API data
   const { data: operationalData } = useGetKpisQuery();
   const { data: productData } = useGetProductsQuery();
 
+  // Format operational expenses for line chart
   const operationalExpenses = useMemo(() => {
     return (
       operationalData &&
@@ -40,17 +42,16 @@ const Row2 = () => {
           month: string;
           operationalExpenses: number;
           nonOperationalExpenses: number;
-        }) => {
-          return {
-            name: month.substring(0, 3),
-            "Operational Expenses": operationalExpenses,
-            "Non Operational Expenses": nonOperationalExpenses,
-          };
-        }
+        }) => ({
+          name: month.substring(0, 3),
+          "Operational Expenses": operationalExpenses,
+          "Non Operational Expenses": nonOperationalExpenses,
+        })
       )
     );
   }, [operationalData]);
 
+  // Format product data for scatter chart
   const productExpenseData = useMemo(() => {
     return (
       productData &&
@@ -63,17 +64,16 @@ const Row2 = () => {
           _id: string;
           price: number;
           expense: number;
-        }) => {
-          return {
-            id: _id,
-            price: price,
-            expense: expense,
-          };
-        }
+        }) => ({
+          id: _id,
+          price,
+          expense,
+        })
       )
     );
   }, [productData]);
 
+  // Calculate latest operational expense ratio (for BoxHeader)
   const operationalExpenseRatio = useMemo(() => {
     if (!operationalData || operationalData[0].monthlyData.length === 0)
       return null;
@@ -82,10 +82,6 @@ const Row2 = () => {
     if (!latestMonth) return null;
 
     const { operationalExpenses, nonOperationalExpenses } = latestMonth;
-
-    if (operationalExpenses == null || nonOperationalExpenses == null)
-      return null;
-
     const total = operationalExpenses + nonOperationalExpenses;
     if (total === 0) return null;
 
@@ -93,6 +89,7 @@ const Row2 = () => {
     return `${ratio.toFixed(1)}%`;
   }, [operationalData]);
 
+  // Calculate campaign performance metrics vs target
   const targetSalesData = useMemo(() => {
     if (!operationalData) return null;
 
@@ -111,6 +108,7 @@ const Row2 = () => {
     };
   }, [operationalData]);
 
+  // Compare revenue change month-over-month
   const revenueChangeText = useMemo(() => {
     if (!operationalData || operationalData[0].monthlyData.length < 2)
       return null;
@@ -126,6 +124,7 @@ const Row2 = () => {
       : `Revenue grew by ${change.toFixed(1)}%`;
   }, [operationalData]);
 
+  // Compare profit margin change month-over-month
   const profitMarginChangeText = useMemo(() => {
     if (!operationalData || operationalData[0].monthlyData.length < 2)
       return null;
@@ -143,6 +142,7 @@ const Row2 = () => {
       : `Margins are down ${Math.abs(change).toFixed(1)}% from last month.`;
   }, [operationalData]);
 
+  // Pie chart data for achieved vs target
   const pieData = useMemo(() => {
     if (!targetSalesData) return [];
 
@@ -150,20 +150,19 @@ const Row2 = () => {
     const target = targetSalesData.target;
 
     if (achieved <= target) {
-      const remaining = target - achieved;
       return [
         { name: "Achieved", value: achieved },
-        { name: "Remaining", value: remaining },
+        { name: "Remaining", value: target - achieved },
       ];
     } else {
-      const over = achieved - target;
       return [
         { name: "Target", value: target },
-        { name: "Overachieved", value: over },
+        { name: "Overachieved", value: achieved - target },
       ];
     }
   }, [targetSalesData]);
 
+  // Calculate average product profit margin
   const avgProductProfitMargin = useMemo(() => {
     if (!productData || productData.length === 0) return null;
 
@@ -174,12 +173,12 @@ const Row2 = () => {
     }, 0);
 
     const avgMargin = totalMargin / validProducts.length;
-
     return `${avgMargin >= 0 ? "+" : ""}${avgMargin.toFixed(1)}%`;
   }, [productData]);
 
   return (
     <>
+      {/* Line Chart: Operational vs Non-Operational Expenses */}
       <DashboardBox
         gridArea="d"
         sx={{ minHeight: { xs: "390px", sm: "390px", md: "auto" } }}
@@ -191,12 +190,7 @@ const Row2 = () => {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={operationalExpenses}
-            margin={{
-              top: 20,
-              right: 0,
-              left: -10,
-              bottom: 55,
-            }}
+            margin={{ top: 20, right: 0, left: -10, bottom: 55 }}
           >
             <CartesianGrid vertical={false} stroke={palette.grey[800]} />
             <XAxis
@@ -235,6 +229,7 @@ const Row2 = () => {
         </ResponsiveContainer>
       </DashboardBox>
 
+      {/* Pie Chart and description text: Target vs Actual */}
       <DashboardBox
         gridArea="e"
         sx={{ minHeight: { xs: "340px", sm: "340px", md: "auto" } }}
@@ -248,15 +243,11 @@ const Row2 = () => {
           }
         />
         <FlexBetween mt="0.25rem" gap="1.5rem" pr="1rem">
+          {/* Pie Chart */}
           <PieChart
             width={110}
             height={100}
-            margin={{
-              top: 0,
-              right: -10,
-              left: 10,
-              bottom: 0,
-            }}
+            margin={{ top: 0, right: -10, left: 10, bottom: 0 }}
           >
             <Pie
               stroke="none"
@@ -271,6 +262,8 @@ const Row2 = () => {
               ))}
             </Pie>
           </PieChart>
+
+          {/* Sales Target Summary */}
           <Box ml="-0.7rem" flexBasis="40%" textAlign="center">
             <Typography variant="h5">Target Sales</Typography>
             <Typography m="0.3rem 0" variant="h3" color={palette.primary[300]}>
@@ -280,6 +273,8 @@ const Row2 = () => {
               Finance goals of the campaign that is desired
             </Typography>
           </Box>
+
+          {/* Revenue & Margin Text Summary */}
           <Box flexBasis="40%">
             <Typography variant="h5">Losses in Revenue</Typography>
             <Typography variant="h6">{revenueChangeText ?? "N/A"}</Typography>
@@ -294,6 +289,7 @@ const Row2 = () => {
         </FlexBetween>
       </DashboardBox>
 
+      {/* Scatter Chart: Product Price vs Expense */}
       <DashboardBox
         gridArea="f"
         sx={{ minHeight: { xs: "340px", sm: "340px", md: "auto" } }}
@@ -303,14 +299,7 @@ const Row2 = () => {
           sideText={avgProductProfitMargin ?? "N/A"}
         />
         <ResponsiveContainer width="100%" height="100%">
-          <ScatterChart
-            margin={{
-              top: 20,
-              right: 25,
-              bottom: 40,
-              left: -10,
-            }}
-          >
+          <ScatterChart margin={{ top: 20, right: 25, bottom: 40, left: -10 }}>
             <CartesianGrid stroke={palette.grey[800]} />
             <XAxis
               type="number"

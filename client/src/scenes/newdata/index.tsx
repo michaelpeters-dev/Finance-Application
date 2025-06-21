@@ -11,9 +11,14 @@ interface UploadDataProps {
 
 const UploadData = ({ isSidebarOpen }: UploadDataProps) => {
   const { palette } = useTheme();
+
+  // State for selected file
   const [file, setFile] = useState<File | null>(null);
+
+  // Snackbar visibility state
   const [open, setOpen] = useState(false);
 
+  // Handle upload attempt while upload functionality is disabled
   const handleDisabledClick = () => {
     setOpen(true);
   };
@@ -22,7 +27,7 @@ const UploadData = ({ isSidebarOpen }: UploadDataProps) => {
     <Box
       sx={{
         width: "100%",
-        height: "calc(100vh - 64px)",
+        height: "calc(100vh - 64px)", // Account for top nav height
         overflowX: "hidden",
         padding: "2rem 1rem 4rem 1rem",
         paddingLeft: isSidebarOpen ? "20px" : "20px",
@@ -33,7 +38,7 @@ const UploadData = ({ isSidebarOpen }: UploadDataProps) => {
         gap: "1.5rem",
       }}
     >
-      {/* UPLOAD TOOLBAR */}
+      {/* Toolbar for file selection and (disabled) upload */}
       <DashboardBox sx={{ flexShrink: 0 }}>
         <UploadToolbar
           onSelectFile={setFile}
@@ -41,7 +46,7 @@ const UploadData = ({ isSidebarOpen }: UploadDataProps) => {
         />
       </DashboardBox>
 
-      {/* SAMPLE JSON VIEWER */}
+      {/* Viewer for JSON file structure preview */}
       <DashboardBox
         sx={{
           flexGrow: 1,
@@ -53,7 +58,7 @@ const UploadData = ({ isSidebarOpen }: UploadDataProps) => {
         <SampleViewer />
       </DashboardBox>
 
-      {/* SNACKBAR NOTIFICATION */}
+      {/* Snackbar to inform users that uploads are disabled */}
       <ConfirmationSnackbar
         open={open}
         onClose={() => setOpen(false)}

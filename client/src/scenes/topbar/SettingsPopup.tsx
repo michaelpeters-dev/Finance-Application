@@ -22,7 +22,12 @@ const SettingsPopup = () => {
         Settings
       </Typography>
 
-      <Divider sx={{ borderColor: "rgba(255,255,255,0.1)", mb: 1 }} />
+      <Divider
+        sx={{
+          borderColor: "rgba(255,255,255,0.1)",
+          mb: 1,
+        }}
+      />
 
       <FlexBetween
         sx={{
@@ -30,13 +35,14 @@ const SettingsPopup = () => {
           py: 0.5,
           borderRadius: 1,
           bgcolor: "#2d2d34",
-          "&:hover": { bgcolor: "#3a3a42" },
-          transition: "all 0.2s",
           cursor: "not-allowed",
+          transition: "all 0.2s",
+          "&:hover": {
+            bgcolor: "#3a3a42",
+          },
         }}
       >
         <Typography variant="body2">Language: English</Typography>
-
         <Lock size={14} color="#aaa" />
       </FlexBetween>
     </Paper>

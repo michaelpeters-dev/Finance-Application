@@ -19,6 +19,7 @@ const Row3 = () => {
   const { data: productData } = useGetProductsQuery();
   const { data: transactionData } = useGetTransactionsQuery();
 
+  // Prepare pie chart data: category vs. remainder of total expenses
   const pieChartData = useMemo(() => {
     if (kpiData) {
       const totalExpenses = kpiData[0].totalExpenses;
@@ -36,6 +37,7 @@ const Row3 = () => {
     }
   }, [kpiData]);
 
+  // Determine the highest expense category and its percentage of total
   const topExpenseCategory = useMemo(() => {
     if (!kpiData || !kpiData[0]?.expensesByCategory) return null;
     const totalExpenses = kpiData[0].totalExpenses;
@@ -56,6 +58,7 @@ const Row3 = () => {
     return `${topCategory} +${percentage.toFixed(1)}%`;
   }, [kpiData]);
 
+  // Define table columns for product and transaction DataGrids
   const productColumns = [
     { field: "_id", headerName: "id", flex: 1 },
     {
@@ -90,6 +93,7 @@ const Row3 = () => {
     },
   ];
 
+  // Manage notes state, load from localStorage if available
   const [noteText, setNoteText] = useState(() => {
     return (
       localStorage.getItem("dashboard-notes") ||
@@ -100,10 +104,12 @@ const Row3 = () => {
   const [isEditing, setIsEditing] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
+  // Save notes to localStorage when changed
   useEffect(() => {
     localStorage.setItem("dashboard-notes", noteText);
   }, [noteText]);
 
+  // Focus and move cursor to end when entering edit mode
   useEffect(() => {
     if (isEditing && textAreaRef.current) {
       const len = textAreaRef.current.value.length;
@@ -114,6 +120,7 @@ const Row3 = () => {
 
   return (
     <>
+      {/* Products table */}
       <DashboardBox
         gridArea="g"
         sx={{ minHeight: { xs: "310px", sm: "310px", md: "auto" } }}
@@ -153,6 +160,7 @@ const Row3 = () => {
         </Box>
       </DashboardBox>
 
+      {/* Transactions table */}
       <DashboardBox
         gridArea="h"
         sx={{ minHeight: { xs: "310px", sm: "310px", md: "auto" } }}
@@ -192,6 +200,7 @@ const Row3 = () => {
         </Box>
       </DashboardBox>
 
+      {/* Pie charts for expense breakdown by category */}
       <DashboardBox
         gridArea="i"
         sx={{
@@ -237,6 +246,7 @@ const Row3 = () => {
         </FlexBetween>
       </DashboardBox>
 
+      {/* Editable notes section saved to localStorage */}
       <DashboardBox
         gridArea="j"
         sx={{
@@ -263,6 +273,7 @@ const Row3 = () => {
             boxSizing: "border-box",
           }}
         >
+          {/* Edit/save button */}
           <Button
             onClick={() => setIsEditing(!isEditing)}
             sx={{
@@ -287,6 +298,7 @@ const Row3 = () => {
           </Button>
 
           {isEditing ? (
+            // Textarea input mode
             <Box
               component="textarea"
               ref={textAreaRef}
@@ -318,6 +330,7 @@ const Row3 = () => {
               }}
             />
           ) : (
+            // Read-only display mode
             <Typography
               variant="body1"
               sx={{

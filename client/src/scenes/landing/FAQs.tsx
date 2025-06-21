@@ -1,6 +1,7 @@
-"use client";
 import { Plus, Minus } from "lucide-react";
+// State handling
 import { useState } from "react";
+// Utility for conditional classnames
 import clsx from "clsx";
 
 const items = [
@@ -26,6 +27,7 @@ const items = [
   },
 ];
 
+// Individual FAQ accordion item
 const AccordianItem = ({
   question,
   answer,
@@ -34,18 +36,20 @@ const AccordianItem = ({
   answer: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div
       className="py-7 border-b border-white/30"
       onClick={() => setIsOpen(!isOpen)}
     >
+      {/* Question row with toggle icon */}
       <div className="flex items-center">
         <span className="flex-1 text-lg font-bold">{question}</span>
         {isOpen ? <Minus /> : <Plus />}
       </div>
-      <div className={clsx("mt-4", { hidden: !isOpen, "": isOpen === true })}>
-        {answer}
-      </div>
+
+      {/* Answer section, toggled using state */}
+      <div className={clsx("mt-4", { hidden: !isOpen })}>{answer}</div>
     </div>
   );
 };
@@ -57,9 +61,12 @@ const FAQs = () => {
       className="text-white bg-gradient-to-b from-[#10242e] to-black py-[72px] sm:py-24"
     >
       <div className="container">
+        {/* Header */}
         <h2 className="text-center text-5xl sm:text-6xl sm:max-w-[648px] mx-auto font-bold tracking-tighter">
           Frequently asked questions
         </h2>
+
+        {/* FAQ list */}
         <div className="mt-12 w-full px-4 sm:px-6 lg:px-8">
           {items.map(({ question, answer }) => (
             <AccordianItem question={question} answer={answer} key={question} />
