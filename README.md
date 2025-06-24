@@ -2,8 +2,8 @@
 
 **Finance App** is a full-stack machine learning finance platform that empowers users to visualize, forecast, and analyze financial performance. From executive summaries to anomaly detection and predictive modeling, Finance App helps businesses navigate the uncertainties of the financial world.
 
-🔗 **Live Demo:** [https://finance-app-seven-ruby.vercel.app](https://finance-app-seven-ruby.vercel.app)  
-🎥 **Video Walkthrough:** [Watch the full demo on YouTube](https://youtu.be/JAuonCzHhUY)
+🔗 **Website:** [https://finance-app-seven-ruby.vercel.app](https://finance-app-seven-ruby.vercel.app)  
+🔗 **Video Demo:** [Watch the full demo on YouTube](https://youtu.be/JAuonCzHhUY)
 
 ![Dashboard Preview](./client/public/app-screen.png)
 
